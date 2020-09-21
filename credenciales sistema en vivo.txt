@@ -23,3 +23,4 @@ Gaf1234+
 ng build --aot --output-hashing=all --base-href /encuestas/
 
 
+asdasd
