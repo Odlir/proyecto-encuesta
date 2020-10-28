@@ -244,6 +244,10 @@ class EncuestaPersonaController extends Controller
                         $puntaje = $respuesta['puntaje'];
                     }
 
+                    if ($p->formula_item_id == 15 || $p->formula_item_id == 16 || $p->formula_item_id == 21 || $p->formula_item_id == 22 || $p->formula_item_id == 31 || $p->formula_item_id == 32) {
+                        $puntaje = 0;
+                    }
+
                     $p->puntaje = $puntaje;
                 }
             }
