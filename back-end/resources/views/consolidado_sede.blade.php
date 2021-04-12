@@ -324,6 +324,23 @@
         .table-height {
             height: 600px;
         }
+        .temperamentos-individuales {
+            height: auto;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            border: none;
+        }
+        .col1 {
+            width: 50%;
+            text-align: right
+        }
+        .con1 {
+            text-align: right
+        }
+        .col2 {
+            width: 50%;
+        }
     </style>
 </head>
 
@@ -333,11 +350,10 @@
 
     <div class="h1">
         <p>Universidad Peruana de Ciencias Aplicadas</p>
-        <p>Coordinación de Colegios</p>
     </div>
 
     <div class="bg-dark text-white py-3 px-0 mt-5 h1">
-        <p>Dirección de Calidad Educativa</p>
+        <p>Coordinación de Colegios</p>
     </div>
     <div class="pad-doc">
         <div class="h1">
@@ -346,7 +362,7 @@
             <p>“Yo Decido Mi Futuro”</p>
         </div>
         <div class="mt-5">
-            <p class="titulo">{{$colegio}}</p>
+            <p class="titulo font-weight-bold">{{$colegio}}</p>
             <p class="h1 mt-date">{{$date}}</p>
         </div>
     </div>
@@ -355,21 +371,51 @@
 </div>
 
 <div class="page_break pt-5 text-secondary">
+    <div class="mt-5 text-justify">
+        <p>
+            En nombre de la Universidad Peruana de Ciencias Aplicadas (UPC) tenemos el agrado de saludarlos y
+            presentarles un estudio integral de sus alumnos participantes en nuestro programa vocacional
+            “Yo decido mi futuro”.
+        </p>
+        <p>
+            El presente reporte está basado en un modelo de psicología positiva. Esta rama de la psicología
+            se centra no solamente en los aspectos por mejorar de los individuos, sino también en estudiar y
+            destacar las fortalezas que tienen las personas para lograr una mejor calidad de vida y bienestar en sus múltiples roles.
+        </p>
+        <p>
+            El programa parte de la necesidad de proporcionar a los estudiantes recursos para el autoconocimiento y la promoción de la responsabilidad, así como en la autonomía, en la búsqueda de información y la toma de decisiones.
+        </p>
+        <p>
+            Nuestro objetivo principal es que los alumnos y ustedes cuenten con información valiosa acerca de los talentos dominantes, características del temperamento y preferencias vocacionales del grupo que les permita discriminar los roles donde puedan desempeñarse y los campos profesionales en los cuales aplicarlos y desarrollar fortalezas.
+        </p>
+        <p>
+            Nuestro agradecimiento por hacernos participe de esta etapa tan importante y significativa de sus alumnos.
+        </p>
+        <p>
+            Nuestro agradecimiento por hacernos participe de esta etapa tan importante y significativa de sus alumnos.
+        </p>
+        <p>
+            A continuación los invitamos a revisar brevemente, las dimensiones que cada una de las pruebas tiene, así como los resultados obtenidos de todo el grupo evaluado.
+        </p>
+    </div>
+</div>
+
+<div class="page_break pt-5 text-secondary">
 
     <div class="mt-5 text-justify">
         <p class="h3 font-weight-bold">
-            I. INTRODUCCIÓN
+            INSTRUMENTOS
+        </p>
+        <br>
+        <br>
+        <p class="h3 font-weight-bold">
+            EVALUACIÓN DE TALENTOS
         </p>
         <p>
             El presente trabajo está basado en un modelo de psicología positiva.
             Esta nueva rama de la psicología se centra no solamente en arreglar
             lo que está mal, sino en estudiar las fortalezas que tienen las personas
             para lograr una mejor calidad de vida y bienestar.
-        </p>
-        <p>
-            En la actualidad, está científicamente comprobado que las personas que estudian y
-            luego trabajan en sus talentos son más felices, motivadas, comprometidas y
-            aportan al máximo su potencial (en López & Snyder, 2009).
         </p>
         <p>
             Sin embargo, la mayoría de alumnos que elige una carrera no toma en cuenta la compatibilidad
@@ -389,6 +435,9 @@
             Se puede afirmar, luego de mucha investigación, que las personas más exitosas conocen sus talentos
             y construyen su vida en base a ellos (Gallup, 2009).
         </p>
+        <p>
+            El talento puede definirse como aquello que uno hace muy bien, en lo que destaca por encima de los demás y que, además, genera placer.
+        </p>
     </div>
 </div>
 
@@ -406,10 +455,6 @@
 </div>
 
 <div class="page_break text-justify text-secondary">
-    <p>
-        El talento puede definirse como aquello que uno hace muy bien,
-        en lo que destaca por encima de los demás y que, además, genera placer.
-    </p>
 
     <p class="h3 font-weight-bold">
         El enfoque tradicional vs. el enfoque moderno
@@ -551,8 +596,7 @@
 
 <div class="page_break text-secondary">
     <p>
-        A cada áreas considerada le corresponde un color. A continuación se presentan los talentos
-        considerados al interior de cada una de las siete áreas:
+        A continuación se presentan los talentos considerados al interior de cada una de las siete áreas:
     </p>
 
     <table class="w-100">
@@ -596,85 +640,35 @@
 </div>
 
 <div class="page_break text-justify text-secondary">
-    <p class="h3 font-weight-bold">
-        II. OBJETIVOS
+    <p class="font-weight-bold h3 italic">
+        - TEST DE TALENTOS
     </p>
+
     <p>
-        El objetivo principal de la aplicación de los instrumentos del presente trabajo es que los alumnos cuenten
-        con
-        información sobre sus talentos dominantes, características del temperamento y preferencias vocacionales que
-        les
-        permita discriminar los roles donde puedan desempeñarse y los campos profesionales en los cuales aplicarlos
-        y
-        desarrollar fortalezas.
+        El Test de Talentos es una herramienta que permite identificar los talentos de un
+        individuo visto desde la perspectiva del modelo de la Psicología Positiva. Este instrumento se aplica
+        por Internet y presenta 63 “tarjetas” de talentos , de los cuales la persona seleccionará los 12 talentos
+        más desarrollado y adicionalmente puede elegir hasta 3 talentos específicos como más desarrollados.
     </p>
 
-    <p class="h3 font-weight-bold mt-5">
-        III. MUESTRA
-    </p>
     <p>
-        La muestra estuvo conformada por los alumnos que han resuelto satisfactoriamente las tres pruebas:
+        Luego de aplicar el cuestionario, el participante recibe sus resultados en el que se le indica cuáles
+        son sus talentos dominantes de un total de 63 talentos. A continuación, describiremos cada uno de ellos:
     </p>
 
-    @php
-        $total=0;
-    @endphp
-
-    @foreach ($muestra as $m)
-        @php
-            $total= $total+$m->muestra;
-        @endphp
+    @foreach ($talentos_ordenados as $tal)
+        <div class="break-avoid">
+            <p class="font-weight-bold h3">
+                {{$tal->nombre}}
+            </p>
+            <p style="margin-top: -1px;">
+                {{$tal->descripcion}}
+            </p>
+        </div>
     @endforeach
-
-
-    <div>
-        <table class="w-80 font-weight-bold text-center">
-            <thead class="text-white bg-sexo">
-            <tr>
-                <td>
-                    GÉNERO
-                </td>
-                <td>
-                    CANTIDAD
-                </td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="text-white bg-sexo">
-                    MASCULINO
-                </td>
-                <td class="bg-sexo2">
-                    {{$sexo['masculino']}}
-                </td>
-            </tr>
-            <tr>
-                <td class="text-white bg-sexo">
-                    FEMENINO
-                </td>
-                <td class="bg-sexo3">
-                    {{$sexo['femenino']}}
-                </td>
-            </tr>
-            <tr>
-                <td class="text-white bg-sexo">
-                    TOTAL
-                </td>
-                <td class="bg-sexo2">
-                    {{$total}}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
 
 <div class="page_break text-justify text-secondary">
-    <p class="h3 font-weight-bold mt-5">
-        IV. INSTRUMENTOS
-    </p>
-    <br>
-
     <p class="font-weight-bold h3 italic">
         - EVALUACIÓN DE PREFERENCIAS DEL TEMPERAMENTO
     </p>
@@ -928,33 +922,6 @@
 
     <br>
 
-    <p class="font-weight-bold h3 italic">
-        - TEST DE TALENTOS
-    </p>
-
-    <p>
-        El Test de Talentos es una herramienta que permite identificar los talentos de un
-        individuo visto desde la perspectiva del modelo de la Psicología Positiva. Este instrumento se aplica
-        por Internet y presenta 63 “tarjetas” de talentos , de los cuales la persona seleccionará los 12 talentos
-        más desarrollado y adicionalmente puede elegir hasta 3 talentos específicos como más desarrollados.
-    </p>
-
-    <p>
-        Luego de aplicar el cuestionario, el participante recibe sus resultados en el que se le indica cuáles
-        son sus talentos dominantes de un total de 63 talentos. A continuación, describiremos cada uno de ellos:
-    </p>
-
-    @foreach ($talentos_ordenados as $tal)
-        <div class="break-avoid">
-            <p class="font-weight-bold h3">
-                {{$tal->nombre}}
-            </p>
-            <p style="margin-top: -1px;">
-                {{$tal->descripcion}}
-            </p>
-        </div>
-    @endforeach
-
     <div>
         <p class="font-weight-bold h3 italic">
             - TEST DE INTERESES PROFESIONALES
@@ -986,21 +953,216 @@
         <p>
             • Áreas de bajo interés. Son aquellas áreas con puntuaciones de 25 o menos, significa que no has desarrollado interés por este tipo de actividades.
         </p>
-    </div>
+        <br>
+        <br>
+        <p>Las áreas a evaluar son las siguientes:</p>
 
-    <div>
         <p class="h3 font-weight-bold mt-5">
-            V. PROCEDIMIENTO
+            ADMINISTRACIÓN (ADM)
         </p>
-
         <p>
-            La evaluación se llevó a cabo con {{$total}} alumnos que han resuelto las tres encuestas de manera virtual.
+            <strong>Descripción</strong>: Interés en la planificación, organización, dirección y control de los recursos (máquinas, equipos, insumos, personas) de una empresa o fábrica con la finalidad de optimizar sus beneficios.
         </p>
+        <p>
+            •Carreras asociadas: Administración / Gestión, Administración y Gestión Comercial, Administración y Negocios Internacionales, Ingeniería de Gestión Empresarial, Ingeniería Industrial, Recursos Humanos.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            AGRARIO (AGR)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés por el mejoramiento de la calidad de la producción y transformación de productos alimentarios para el consumo humano.
+        </p>
+        <p>
+            •Carreras asociadas: Administración y Agronegocios, Ciencia de los Alimentos, Industrias Alimentarias, Ingeniería Agroindustrial, Ingeniería de Industria Alimentaria.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            ARTISTICO (ART)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés por la producción o participación en presentaciones artísticas de teatro, danza o música.
+        </p>
+        <p>
+            •Carreras asociadas: Artes escénicas, Artista profesional, Danza, Música.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            COMUNICACIÓN (COM)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la realización de producciones verbales o gráficas con la finalidad de informar, publicitar o entretener a la población a través de diferentes medios.
+        </p>
+        <p>
+            •Carreras asociadas: Artes Visuales, Ciencias de la Comunicación, Comunicación Audiovisual y Medios Interactivos, Comunicación e Imagen Empresarial, Comunicación Social, Comunicación y Periodismo, Locución, Periodismo.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            CONSTRUCCIÓN (CON)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en el diseño, construcción y mantenimiento de la infraestructura acordes a las necesidades de las personas.
+        </p>
+        <p>
+            •Carreras asociadas: Ingeniería Civil.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            CULINARIA (CUL)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la preparación de alimentos, la creación de nuevas recetas y la presentación atractiva de comidas, postres y pasteles.
+        </p>
+        <p>
+            •Carreras asociadas: Arte culinario, Gastronomía, Gastronomía y Gestión de Restaurantes.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            DEPORTIVA (DEP)
+        </p>
+        <p>
+            <strong>Descripción</strong>:  Interés por el entrenamiento y rendimiento físico de las personas en actividades deportivas.
+        </p>
+        <p>
+            •Carreras asociadas: Ciencias del Deporte, Profesor o Preparador Físico, Administración y Negocios del Deporte.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            DISEÑO (DIS)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en el diseño de diversos objetos como pequeñas obras de arte empleadas en campos como la decoración, la moda, la industria, entre otros así como el diseño de casas y ambientes de trabajo y recreación para las personas.
+        </p>
+        <p>
+            •Carreras asociadas: Dirección de Artes Gráficas y Publicitarias, Diseño Publicitario, Diseño de Moda, Diseño Gráfico, Diseño Industrial, Arquitectura, Arquitectura de Interiores, Diseño de Interiores.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            FINANCIERA (FIN)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la toma de decisiones sobre las finanzas, el registro y el control de los ingresos y egresos de una empresa u organización económica con la finalidad de obtener las mayores ganancias.
+        </p>
+        <p>
+            •Carreras asociadas: Administración y Finanzas, Contabilidad, Contabilidad y Administración, Economía.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            INFORMÁTICA (INF)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en el diseño y control de los sistemas de almacenamiento, procesamiento y protección de la información.
+        </p>
+        <p>
+            •Carreras asociadas: Ciencias de la Computación, Computación e Informática, Computación y Sistemas, Diseño Web, Informática, Informática Empresarial, Ingeniería de Computación y Sistemas, Ingeniería de Sistemas, Ingeniería de Sistemas de Información, Ingeniería de Software, Seguridad Informática.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            JURÍDICO (JUR)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la defensa de los derechos y la asesoría jurídica y legal de las personas así como en ser mediador entre dos partes para llegar a acuerdos.
+        </p>
+        <p>
+            •Carreras asociadas: Derecho, Derecho y Ciencias políticas.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            MARKETING (MAR)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la identificación de las necesidades de los consumidores para ofrecerles productos y servicios competitivos en el mercado.
+        </p>
+        <p>
+            •Carreras asociadas: Interés en la identificación de las necesidades de los consumidores para ofrecerles productos y servicios competitivos en el mercado.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            MECÁNICO/ELÉCTRICA (MEC)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en el funcionamiento y manejo de sistemas, máquinas y herramientas de tipo mecánico, eléctrico o electrónico.
+        </p>
+        <p>
+            •Carreras asociadas: Ingeniería Electrónica, Ingeniería Mecánica, Ingeniería Mecatrónica.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            MINERA (MIN)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés por el estudio, la búsqueda y la extracción de los recursos minerales.
+        </p>
+        <p>
+            •Carreras asociadas: Ingeniería de Gestión minera, Ingeniería de Minas.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            PEDAGOGÍA (PED)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la mejora de los procesos de enseñanza y aprendizaje.
+        </p>
+        <p>
+            •Carreras asociadas: Educación, Educación especial, Educación y Gestión del aprendizaje.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            SALUD (SAL)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la atención de las necesidades de salud de las personas así como en la orientación que se les puede brindar para mejorar su calidad de vida.
+        </p>
+        <p>
+            •Carreras asociadas: Enfermería, Medicina, Nutrición y Dietética, Odontología, Terapia Física.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            SOCIAL (SOC)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés y preocupación por el bienestar de las personas orientándolas hacia el logro de sus objetivos personales.
+        </p>
+        <p>
+            •Carreras asociadas: Psicología
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            TRADUCCIÓN (TRA)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la interpretación de la producción oral y escrita de distintos grupos sociales como una manifestación de su cultura.
+        </p>
+        <p>
+            •Carreras asociadas: Traducción e Interpretación profesional.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            TURISMO (TUR)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés por la promoción y realización de la actividad turística y hotelera de un país.
+        </p>
+        <p>
+            •Carreras asociadas: Ecoturismo, Turismo, Hotelería, Hotelería y Administración.
+        </p>
+
+        <p class="h3 font-weight-bold mt-5">
+            VETERINARIA (VET)
+        </p>
+        <p>
+            <strong>Descripción</strong>: Interés en la atención de las necesidades de salud de los animales así como en la orientación que se les puede brindar para mejorar su calidad de vida.
+        </p>
+        <p>
+            •Carreras asociadas: Medicina Veterinaria.
+        </p>
+
+
     </div>
 
     <div>
         <p class="h3 font-weight-bold mt-5">
-            VI. RESULTADOS
+            RESULTADOS
         </p>
 
         <p>
@@ -1024,8 +1186,42 @@
     @foreach ($areas as $a)
         <div>
             <div class="table-temperamento">
-                <p class="font-weight-bold text-secondary h3">1.2.{{$loop->index +1}} Descripciones de los elementos del
+                <p class="font-weight-bold text-secondary h3">Descripciones de los elementos del
                     área {{$a->nombre}}</p>
+                <p>{!! nl2br(htmlspecialchars($a->descripcion)) !!}</p>
+            </div>
+        </div>
+        <br>
+    @endforeach
+</div>
+
+<div class="page_break text-justify text-secondary">
+    @foreach ($areas as $a)
+        <div>
+            <div class="table-temperamento">
+                {{--<div style="width: 40%;float: left;height: 190px;overflow: auto">
+                    <table class="table text-secondary" style="text-align: right">
+                        @foreach ($a->items as $a_i)
+                            @foreach ($a_i->items as $i_i)
+                                @if ($i_i->posicion=='1' && $i_i->id!=15 && $i_i->id!=21 && $i_i->id!=31)
+                                    <tr class="con1"><td class="col1">{{$i_i->nombre}} vs. </td></tr>
+                                @endif
+                            @endforeach
+                        @endforeach
+                    </table>
+                </div>
+                <div style="width: 40%;float: left;height: 190px;overflow: auto">
+                    <table class="table text-secondary" style="text-align: left">
+                        @foreach ($a->items as $a_i)
+                            @foreach ($a_i->items as $i_i)
+                                @if ($i_i->posicion=='0' && $i_i->id!=16 && $i_i->id!=22 && $i_i->id!=32)
+                                    <tr class="con2"><td class="col2">{{$i_i->nombre}}</td></tr>
+                                @endif
+                            @endforeach
+                        @endforeach
+                    </table>
+                </div>--}}
+                <br>
                 <br>
                 <table class="w-100 table text-secondary text-center table-temperamento">
                     <tr>
@@ -1134,13 +1330,11 @@
 
 <div class="page_break text-justify text-secondary">
     <div class="z-index">
-        <p class="font-weight-bold h3">
-            TEST DE TALENTOS
-        </p>
+        <h2>
+            <strong>Evaluación de Talentos</strong>
+        </h2>
         <p>
-            La siguiente imagen presenta cuántos alumnos de la muestra total del colegio caen dentro de cada
-            categoría para cada una de las dimensiones de la prueba de Talentos, así como el porcentaje
-            (normal y acumulado) que esto representa dentro del grupo evaluado.
+            La siguiente imagen representa el porcentaje de alumnos, de acuerdo a la muestra total, que se ubican dentro de cada categoría en base a las dimensiones de la prueba de Talentos.
         </p>
 
         <p class="text-center h1 mt-5">Talentos más desarrollados por categorías</p>
@@ -1196,13 +1390,8 @@
 
 <div class="page_break text-justify text-secondary">
     <div class="z-index">
-        <p class="font-weight-bold h3">
-            TEST DE TALENTOS
-        </p>
         <p>
-            La siguiente tabla presenta cuántos alumnos de la muestra total del colegio caen dentro de
-            cada categoría para cada una de las dimensiones de la prueba de Talentos, así como el
-            porcentaje (normal y acumulado) que esto representa dentro del grupo evaluado.
+            La siguiente tabla presenta los 12 talentos más representativos del grupo evaluado, así como los 3 talentos específicos relacionadas a actividades que se estimulan y potencia a través de la práctica.
         </p>
     </div>
 
@@ -1241,7 +1430,8 @@
 
 <div class="page_break text-justify text-secondary">
     <p>A partir de la tabla y el gráfico anteriores, se puede notar que el talento que aparece como dominante
-        con mayor frecuencia en la muestra evaluada es el de
+        con mayor frecuencia en la muestra evaluada es el de:
+        <br>
         @foreach ($talentos_mas_desarrollados as $item)
             <b class="h3 italic">{{$item->nombre}}</b> <span class="h3 italic">("{{$item->descripcion}}");</span>
             @break;
@@ -1271,13 +1461,12 @@
 </div>
 
 <div class="page_break text-justify text-secondary">
+    <h2>
+        <strong>Evaluación de Intereses</strong>
+    </h2>
     <p>
-        TEST DE INTERESES
+        La siguiente tabla muestra los puntajes acumulados de acuerdo a cada área de interés de manera grupal. Las carreras comprendidas en cada una de ellas figuran en la explicación del test, líneas arriba.
     </p>
-    <p>
-        La siguiente tabla muestra los puntajes acumulados de acuerdo a cada área de interés de manera grupal.  .
-    </p>
-    <br>
 
     <table class="w-100 table-intereses text-secondary">
         <thead class="text-center" style="font-weight:bold; font-size: 17px;">
@@ -1339,10 +1528,6 @@
                 <b class="italic h3">{{$i->carrera2}}</b>&nbsp;({{$i->descripcion}});&nbsp;
             @endif
         @endforeach
-    </p>
-
-    <p class="h3 font-weight-bold mt-5">
-        VII. CONCLUSIONES
     </p>
 
     <p>
