@@ -47,7 +47,8 @@ class PersonaImport implements ToCollection, WithHeadingRow
             '*.nombres' => 'required',
             '*.apellido_paterno' => 'required',
             '*.sexo' => 'required|in:Masculino,Femenino,masculino,femenino,MASCULINO,FEMENINO',
-            '*.seccion' => 'alpha_num|nullable'
+            '*.seccion' => 'alpha_num|nullable',
+            '*.dni' => 'digits:8|nullable'
         ], $messages)->validate();
 
         foreach ($rows as $row) {
@@ -58,7 +59,10 @@ class PersonaImport implements ToCollection, WithHeadingRow
                 'sexo' => $row['sexo'],
                 'anio' => $row['seccion'],
                 'rol_id' => 2,
-                'insert_user_id' => $this->user
+                'insert_user_id' => $this->user,
+                'correo' => $row['correo'],
+                'dni' => $row['dni'],
+                'celular' => $row['celular'],
             ]);
 
             EncuestaPersona::create([

@@ -402,7 +402,42 @@
             </tbody>
         </table>
         @else
-        <p class="font-weight-bold ml-4 h3">No tiene áreas de alto interes.</p>
+        <table class="w-100 text-secondary table-resultado">
+            <thead class="font-weight-bold text-center">
+                <tr>
+                    <td width="60%" colspan="2">
+                        Área
+                    </td>
+                    <td width="60%">
+                        Carreras Asociadas
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                $puntajes_sort_desc = $puntajes_sort->sortByDesc('puntaje');
+                $puntaje_mas_alto = $puntajes_sort_desc->first();
+                @endphp
+
+                @if ($puntaje_mas_alto)
+                <tr>
+                    <td width="30%" class="font-weight-bold text-center">
+                        {{ $puntaje_mas_alto->carrera->nombre }}
+                    </td>
+                    <td width="70%" class="mx-2 text-justify">
+                        {{ $puntaje_mas_alto->carrera->interes }}
+                    </td>
+                    <td class="text-center">
+                        @foreach ($puntaje_mas_alto->carrera->intereses as $i)
+                            @if ($i->carrera_id == $puntaje_mas_alto->carrera->id)
+                                <p class="m-0">{{ $i->nombre }}</p>
+                            @endif
+                        @endforeach
+                    </td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
         @endif
 
         <br>

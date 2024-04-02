@@ -24,7 +24,10 @@ export class DetallePersonaComponent implements OnInit {
     insert: { name: null },
     edit: { name: '' },
     created_at: null,
-    updated_at: null
+    updated_at: null,
+		dni: null,
+		correo: null,
+		celular: null
   };
 
   previousUrl: string;

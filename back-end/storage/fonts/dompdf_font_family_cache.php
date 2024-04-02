@@ -78,6 +78,6 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'comfortaa' => array(
-    'normal' => $fontDir . '/comfortaa-normal_cfcd9e9b173e1355ffa9b68cc14d847c',
+    'normal' => $fontDir . '/comfortaa-normal_08c28694b8d80b5cdc5eca356310885d',
   ),
 ) ?>
