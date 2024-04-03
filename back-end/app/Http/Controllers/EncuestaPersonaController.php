@@ -244,6 +244,10 @@ class EncuestaPersonaController extends Controller
                         $puntaje = $respuesta['puntaje'];
                     }
 
+                    if ($p->formula_item_id == 15 || $p->formula_item_id == 16 || $p->formula_item_id == 21 || $p->formula_item_id == 22 || $p->formula_item_id == 31 || $p->formula_item_id == 32) {
+                        $puntaje = 0;
+                    }
+
                     $p->puntaje = $puntaje;
                 }
             }
@@ -299,33 +303,38 @@ class EncuestaPersonaController extends Controller
         }
 
         foreach ($puntajes_rueda as $r) { //SACO LOS PROMEDIOS PARA LA SUPERRUEDA
-            $r->puntaje = $r->puntaje / 4;
 
-            if ($r->puntaje == 6.75) { //SE APLICA EL REDONDEO FINAL
+            if ($r->area_id == 1) {
+                $r->puntaje = $r->puntaje / 4;
+            } else {
+                $r->puntaje = $r->puntaje / 3;
+            }
+
+            if ($r->puntaje >= 6.75) { //SE APLICA EL REDONDEO FINAL
                 $r->puntaje = 7;
-            } else if ($r->puntaje == 6.25) {
+            } else if ($r->puntaje >= 6.25) {
                 $r->puntaje = 6.5;
-            } else if ($r->puntaje == 5.75) {
+            } else if ($r->puntaje >= 5.75) {
                 $r->puntaje = 6;
-            } else if ($r->puntaje == 5.25) {
+            } else if ($r->puntaje >= 5.25) {
                 $r->puntaje = 5.5;
-            } else if ($r->puntaje == 4.75) {
+            } else if ($r->puntaje >= 4.75) {
                 $r->puntaje = 5;
-            } else if ($r->puntaje == 4.25) {
+            } else if ($r->puntaje >= 4.25) {
                 $r->puntaje = 4.5;
-            } else if ($r->puntaje == 3.75) {
+            } else if ($r->puntaje >= 3.75) {
                 $r->puntaje = 4;
-            } else if ($r->puntaje == 3.25) {
+            } else if ($r->puntaje >= 3.25) {
                 $r->puntaje = 3.5;
-            } else if ($r->puntaje == 2.75) {
+            } else if ($r->puntaje >= 2.75) {
                 $r->puntaje = 3;
-            } else if ($r->puntaje == 2.25) {
+            } else if ($r->puntaje >= 2.25) {
                 $r->puntaje = 2.5;
-            } else if ($r->puntaje == 1.75) {
+            } else if ($r->puntaje >= 1.75) {
                 $r->puntaje = 2;
-            } else if ($r->puntaje == 1.25) {
+            } else if ($r->puntaje >= 1.25) {
                 $r->puntaje = 1.5;
-            } else if ($r->puntaje == 0.75) {
+            } else if ($r->puntaje >= 0.75) {
                 $r->puntaje = 1;
             }
 
