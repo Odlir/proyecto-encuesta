@@ -26,16 +26,6 @@ class EmpresaSucursal extends Model
         });
     }
 
-    public function pais()
-    {
-        return $this->belongsTo('App\Pais');
-    }
-
-    public function ciudad()
-    {
-        return $this->belongsTo('App\Ciudad');
-    }
-
     public function insert()
     {
         return $this->belongsTo('App\User', 'insert_user_id');
@@ -50,7 +40,7 @@ class EmpresaSucursal extends Model
     {
         return $this->hasMany('App\Encuesta');
     }
-    
+
     public function empresa()
     {
         return $this->belongsTo('App\Empresa');

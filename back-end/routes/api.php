@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UbigeoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -31,8 +32,6 @@ Route::group([
     Route::resource('roles','RolController');
     Route::resource('personas','PersonaController');
     Route::resource('empresas','EmpresaController');
-    Route::resource('paises','PaisController');
-    Route::resource('ciudades','CiudadController');
     Route::resource('empresa_sucursal','EmpresaSucursalController');
     Route::resource('importar','ImportController');
     Route::resource('encuestas','EncuestaController');
@@ -48,6 +47,10 @@ Route::group([
     Route::get('exportar/consolidados/{interes_id}/{persona_id}', 'ExportController@pdf_consolidado');
     Route::resource('encuesta_puntaje','EncuestaPuntajeController');
     Route::resource('talentos','TalentoController');
+
+    Route::get('/departamentos', [UbigeoController::class, 'getDepartamentos'])->name('getDepartamentos');
+    Route::get('/provincias/{id}', [UbigeoController::class, 'getProvinciaByDepartamentoId'])->name('getProvincias');
+    Route::get('/distritos/{id}', [UbigeoController::class, 'getDistritoByProvinciaId'])->name('getDistritos');
 });
 
 

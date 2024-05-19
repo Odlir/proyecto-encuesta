@@ -43,6 +43,90 @@
 						<hr>
 					</div>
 
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Sede</label>
+						<div class="col-sm-8">
+							<input type="text" name="sede" class="form-control" [(ngModel)]="form.sede">
+						</div>
+						<hr>
+					</div>
+
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Código</label>
+						<div class="col-sm-8">
+							<input type="text" name="codigo" class="form-control" [(ngModel)]="form.codigo">
+						</div>
+						<hr>
+					</div>
+
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Nivel</label>
+						<div class="col-sm-8">
+							<input type="text" name="nivel" class="form-control" [(ngModel)]="form.nivel">
+						</div>
+						<hr>
+					</div>
+
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Gestión</label>
+						<div class="col-sm-8">
+							<select name="gestion" id="" class="form-control" [(ngModel)]="form.gestion">
+								<option value="Privada">Privada</option>
+								<option value="Pública de gestión directa">Pública de gestión directa</option>
+								<option value="Pública de gestión privada">Pública de gestión privada</option>
+							</select>
+						</div>
+						<hr>
+					</div>
+
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Gestión departamento</label>
+						<div class="col-sm-8">
+							<select name="gestion_departamento" id="" class="form-control" [(ngModel)]="form.gestion_departamento">
+								<option value="Asociación civil / Inst.Benéfica">Asociación civil / Inst.Benéfica</option>
+								<option value="Comunidad">Comunidad</option>
+								<option value="Comunidad o asociación religiosa">Comunidad o asociación religiosa</option>
+								<option value="Convenio con Sector Educación">Convenio con Sector Educación</option>
+								<option value="Cooperativo">Cooperativo</option>
+								<option value="Empresa (Fiscalizado)">Empresa (Fiscalizado)</option>
+								<option value="Municipalidad">Municipalidad</option>
+								<option value="Otro sector público (FF.AA.)">Otro sector público (FF.AA.)</option>
+								<option value="Particular">Particular</option>
+								<option value="Sector Educación">Sector Educación</option>
+							</select>
+						</div>
+						<hr>
+					</div>
+
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Departamento</label>
+						<div class="col-sm-8">
+							<select name="departamento" class="form-control" [(ngModel)]="form.distrito.provincia.departamento_id"
+								(change)="getProvincias()">
+								<option [value]="item.id" *ngFor="let item of departamentos">{{item.nombre}}</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Provincia</label>
+						<div class="col-sm-8">
+							<select name="provincia" class="form-control" [(ngModel)]="form.distrito.provincia_id"
+								(change)="getDistritos()">
+								<option [value]="item.id" *ngFor="let item of provincias">{{item.nombre}}</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row my-3">
+						<label class="col-sm-4 col-form-label w-100">Distrito</label>
+						<div class="col-sm-8">
+							<select name="distrito" class="form-control" [(ngModel)]="form.ubigeo">
+								<option [value]="item.id" *ngFor="let item of distritos">{{item.nombre}}</option>
+							</select>
+						</div>
+					</div>
+
 					<div class="form-group row mt-5">
 						<div class="col-12">
 							<button type="submit" class="btn btn-success">GUARDAR</button>

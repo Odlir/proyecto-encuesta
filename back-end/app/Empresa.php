@@ -14,9 +14,18 @@ class Empresa extends Model
         'contacto',
         'email',
         'telefono',
+        'ubigeo',
+        'sede',
+        'codigo',
+        'nivel',
+        'gestion',
+        'gestion_departamento',
         'insert_user_id',
         'edit_user_id'
     ];
+
+    protected $appends = ['ubigeo_completo'];
+
 
     public static function boot()
     {
@@ -27,6 +36,19 @@ class Empresa extends Model
             $model->razon_social = $model->setUpperCase('razon_social', $model->razon_social);
             $model->contacto = $model->setUpperCase('contacto', $model->contacto);
         });
+    }
+
+    public function getUbigeoCompletoAttribute()
+    {
+        if ($this->distrito) {
+            return $this->distrito->nombre . " - " . $this->distrito->provincia->nombre . " - " . $this->distrito->provincia->departamento->nombre;
+        }
+        return '';
+    }
+
+    public function distrito()
+    {
+        return $this->belongsTo('App\Distrito', 'ubigeo', 'id');
     }
 
     public function sucursales()
