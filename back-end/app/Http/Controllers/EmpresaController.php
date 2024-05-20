@@ -79,6 +79,7 @@ class EmpresaController extends Controller
     {
         $data = Empresa::with('insert')
             ->with('edit')
+            ->with('distrito.provincia.departamento')
             ->with(['sucursales' => function ($query) {
                 $query->where('estado', '1')
                     ->orderBy('id', 'DESC');

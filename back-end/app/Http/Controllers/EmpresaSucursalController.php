@@ -73,8 +73,6 @@ class EmpresaSucursalController extends Controller
     {
         $data = EmpresaSucursal::with('insert')
             ->with('edit')
-            ->with('pais')
-            ->with('ciudad')
             ->with('empresa')
             ->where('id', $id)
             ->first();

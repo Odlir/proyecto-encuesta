@@ -17,8 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FormulaItemSeeder::class);
         $this->call(CarreraSeeder::class);
         $this->call(CarreraInteresSeeder::class);
-        $this->call(PaisSeeder::class);
-        $this->call(CiudadSeeder::class);
         $this->call(RolSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(TipoEncuestaSeeder::class);
@@ -31,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RuedaSeeder::class);
         $this->call(DescripcionTalentoSeeder::class);
         $this->call(PercentilSeeder::class);
+        $this->call(UbigeoSeeder::class);
     }
 }

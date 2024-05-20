@@ -23,6 +23,23 @@ export class CrudEmpresaComponent implements OnInit {
 		contacto: null,
 		email: null,
 		telefono: null,
+		sede: null,
+		codigo: null,
+		nivel: 'Secundaria',
+		gestion: null,
+		gestion_departamento: null,
+		ubigeo: null,
+		distrito: {
+			nombre: null,
+			provincia_id: null,
+			provincia: {
+				nombre: null,
+				departamento_id: null,
+				departamento: {
+					nombre: null,
+				},
+			},
+		},
 		insert_user_id: this.user.me(),
 		edit_user_id: null,
 		insert: { name: null },
@@ -35,6 +52,9 @@ export class CrudEmpresaComponent implements OnInit {
 	public titulo = "CREAR EMPRESA";
 
 	public id: HttpParams;
+	public departamentos = [];
+	public provincias = [];
+	public distritos = [];
 
 	public generarSucursal = false;
 
@@ -48,6 +68,7 @@ export class CrudEmpresaComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.fetch();
 		this.activatedRoute.queryParams.subscribe(async params => {
 			this.id = params.id;
 			let tab = params.tab;
@@ -62,12 +83,61 @@ export class CrudEmpresaComponent implements OnInit {
 		});
 	}
 
+	fetch() {
+		this.api.get('departamentos').subscribe(
+			(data) => { this.departamentos = data; }
+		);
+	}
+
+	getProvincias() {
+		this.provincias = [];
+		this.distritos = [];
+		this.form.distrito.provincia_id = null;
+		this.form.ubigeo = null;
+		this.api.get('provincias', this.form.distrito.provincia.departamento_id).subscribe(
+			(data) => { this.provincias = data; }
+		);
+	}
+
+	getDistritos() {
+		this.distritos = [];
+		this.form.ubigeo = null;
+		this.api.get('distritos', this.form.distrito.provincia_id).subscribe(
+			(data) => { this.distritos = data; }
+		);
+	}
+
+	getUbigeo() {
+		if (this.form.distrito) {
+			this.api.get('provincias', this.form.distrito.provincia.departamento_id).subscribe(
+				(data) => { this.provincias = data; }
+			);
+
+			this.api.get('distritos', this.form.distrito.provincia_id).subscribe(
+				(data) => { this.distritos = data; }
+			);
+		} else {
+			this.form.distrito = {
+				nombre: null,
+				provincia_id: null,
+				provincia: {
+					nombre: null,
+					departamento_id: null,
+					departamento: {
+						nombre: null,
+					},
+				},
+			};
+		}
+	}
+
 	cargarEditar(next?) {
 		this.titulo = "EDITAR EMPRESA";
 		this.api.get('empresas', this.id).subscribe(
 			(data) => {
 				this.form = data;
 				this.stepper.selected.completed = true;
+				this.getUbigeo();
 				if (next) {
 					this.stepper.next();
 				}
