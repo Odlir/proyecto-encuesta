@@ -1231,7 +1231,7 @@ class ExportController extends Controller
         // echo '/innovacion'.$innovacion;
         // echo '/estructura'.$estructura;
         // echo '/persuasion'.$persuasion;
-        // echo '/cognicion'.$cognicion; 
+        // echo '/cognicion'.$cognicion;
 
         $data = array(
             array('', $innovacion * $factor),
@@ -1262,6 +1262,8 @@ class ExportController extends Controller
 
     public function jobs(Request $request)
     {
+        set_time_limit(300);
+
         $descargar = false;
 
         $temperamento_id = "";
