@@ -32,6 +32,13 @@ class PersonaImport implements ToCollection, WithHeadingRow
     {
         $messages = [];
 
+        if (count($rows) > 40) {
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'personas' => ['El límite de importación son 40 alumnos.'],
+            ]);
+            throw $error;
+        }
+
         $i = 2;
         foreach ($rows as $key => $value) {
 
@@ -53,8 +60,8 @@ class PersonaImport implements ToCollection, WithHeadingRow
 
         foreach ($rows as $row) {
             $persona = Persona::create([
-                'nombres'     => $row['nombres'],
-                'apellido_paterno'    => $row['apellido_paterno'],
+                'nombres' => $row['nombres'],
+                'apellido_paterno' => $row['apellido_paterno'],
                 'apellido_materno' => $row['apellido_materno'],
                 'sexo' => $row['sexo'],
                 'anio' => $row['seccion'],
@@ -66,8 +73,8 @@ class PersonaImport implements ToCollection, WithHeadingRow
             ]);
 
             EncuestaPersona::create([
-                'persona_id'     => $persona->id,
-                'encuesta_general_id'    => $this->encuesta_id,
+                'persona_id' => $persona->id,
+                'encuesta_general_id' => $this->encuesta_id,
                 'insert_user_id' => $this->user
             ]);
         }
