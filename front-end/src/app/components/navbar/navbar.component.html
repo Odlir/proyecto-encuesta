@@ -1,10 +1,10 @@
-<mat-toolbar color="accent">
+<mat-toolbar class="m-header">
 	<mat-toolbar-row>
 		<div class="menu-icon">
-			<button mat-icon-button (click)="expanded(isExpanded)" *ngIf="showButton">
+			<button class="cl-white" mat-icon-button (click)="expanded(isExpanded)" *ngIf="showButton">
 				<mat-icon>{{ !isExpanded ? 'menu_open' : 'menu' }}</mat-icon>
 			</button>
-			<h1 class="example-app-name">Sistema de Encuestas</h1>
+			<h1 class="cl-white">Sistema de Encuestas</h1>
 		</div>
 		<span class="example-spacer"></span>
 		<div class="example-icon">

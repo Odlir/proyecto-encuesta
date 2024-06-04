@@ -14,10 +14,18 @@
     color: white;
 }
 
+.m-header {
+	background: #440099;
+}
+
 .mat-toolbar-multiple-rows {
     min-height: 48px;
 }
 
 .mat-toolbar-row, .mat-toolbar-single-row {
     height: 48px;
+}
+
+.cl-white {
+	color: white;
 }

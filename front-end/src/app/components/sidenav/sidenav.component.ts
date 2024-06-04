@@ -1,4 +1,4 @@
-import { TokenService } from './../../Services/token/token.service';
+import { TokenService } from '../../Services/token/token.service';
 import { Component, OnInit } from '@angular/core';
 import { SharedVarService } from '../../Services/shared/shared-var.service';
 import { Subscription } from 'rxjs';

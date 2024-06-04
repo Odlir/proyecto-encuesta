@@ -21,6 +21,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
 
 /* LIBRERIAS */
 import { AppLibreriasModule } from './app-librerias/app-librerias.module';
+import { ChartsModule } from 'ng2-charts';
 
 /* */
 
@@ -109,7 +110,8 @@ import { EspecificosMenosComponent } from './components/test-talentos/especifico
 		TooltipModule.forRoot(),
 		NgProgressModule,
 		NgProgressHttpModule,
-		NgProgressRouterModule
+		NgProgressRouterModule,
+		ChartsModule
 	],
 	providers: [ConstantsService, BsModalService],
 	bootstrap: [AppComponent]
