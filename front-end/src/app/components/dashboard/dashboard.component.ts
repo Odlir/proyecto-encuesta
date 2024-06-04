@@ -14,6 +14,11 @@ export class DashboardComponent implements OnInit {
 
 	public pieChartOptions: ChartOptions = {
 		responsive: true,
+		title: {
+			display: true,
+			text: 'Carreras mas seleccionadas',
+			fontSize: 16
+		}
 	};
 	public pieChartLabels: Label[] = ['Ingeniería', 'Medicina', 'Arte', 'Negocios', 'Otros'];
 	public pieChartData: number[] = [30, 25, 20, 15, 10];
@@ -28,6 +33,11 @@ export class DashboardComponent implements OnInit {
 		scales: {
 			xAxes: [{}],
 			yAxes: [{}]
+		},
+		title: {
+			display: true,
+			text: 'Comparacion de encuestas realizadas durante este año y el año anterior',
+			fontSize: 16
 		},
 		plugins: {
 			datalabels: {
@@ -50,6 +60,11 @@ export class DashboardComponent implements OnInit {
 
 	public polarAreaChartOptions: ChartOptions = {
 		responsive: true,
+		title: {
+			display: true,
+			text: 'Cursos mas seleccionados',
+			fontSize: 16
+		}
 	};
 	public polarAreaChartLabels: Label[] = ['Matematica', 'Ciencias', 'Historia', 'Ingles', 'Arte'];
 	public polarAreaChartData: ChartDataSets = {
