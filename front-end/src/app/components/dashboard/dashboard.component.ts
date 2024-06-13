@@ -14,13 +14,13 @@ export class DashboardComponent implements OnInit {
 		responsive: true,
 		title: {
 			display: true,
-			text: 'Carreras mas seleccionadas',
+			text: 'Areas de Intereses mas seleccionadas',
 			fontSize: 16
 		}
 	};
-	public pieChartLabels: Label[] = ['Ingeniería', 'Medicina', 'Arte', 'Negocios', 'Otros'];
+	public pieChartLabels: Label[] = ['Administracion', 'Comunicacion', 'Financiero', 'Informatica', 'Salud'];
 	public pieChartData: number[] = [30, 25, 20, 15, 10];
-	public pieChartType: ChartType = 'pie';
+	public pieChartType: ChartType = 'doughnut';
 	public pieChartLegend = true;
 	public pieChartPlugins = [];
 
@@ -60,15 +60,15 @@ export class DashboardComponent implements OnInit {
 		responsive: true,
 		title: {
 			display: true,
-			text: 'Cursos mas seleccionados',
+			text: 'Talentos mas seleccionados',
 			fontSize: 16
 		}
 	};
-	public polarAreaChartLabels: Label[] = ['Matematica', 'Ciencias', 'Historia', 'Ingles', 'Arte'];
+	public polarAreaChartLabels: Label[] = ['Critico', 'Analitico', 'Artistico', 'Original', 'Visionario'];
 	public polarAreaChartData: ChartDataSets = {
 		data: [11, 16, 7, 3, 14]
 	};
-	public polarAreaChartType: ChartType = 'polarArea';
+	public polarAreaChartType: ChartType = 'pie';
 
 	constructor() {
 	}

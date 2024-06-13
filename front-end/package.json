@@ -31,10 +31,12 @@
     "angular-sidebarjs": "^5.1.0",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
+	  "chart.js": "^2.9.4",
     "file-saver": "^2.0.2",
     "moment": "^2.24.0",
     "ng-sidebarjs": "^6.0.1",
     "ng-simple-sidebar": "^4.1.0",
+	  "ng2-charts": "^2.4.3",
     "ngx-bootstrap": "^5.6.1",
     "ngx-progressbar": "^6.0.2",
     "rxjs": "~6.5.4",
@@ -62,5 +64,9 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
-  }
+  },
+	"engines": {
+		"npm" : "6.4.1",
+		"node" : "10.13.0"
+	}
 }
