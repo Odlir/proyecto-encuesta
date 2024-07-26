@@ -3,6 +3,11 @@
 		<img width="40%" height="40%" src="assets/images/logo_upc_red.png" alt="UPC">
 		<span>UPC </span><span *ngIf="isExpanded">Encuestas</span>
 	</div>
+	<a [class.expanded]="isExpanded" class="parent" mat-list-item routerLinkActive="list-item-active"
+	   routerLink="dashboard" [routerLinkActiveOptions]="{exact: true}">
+		<fa-icon [icon]="['fas', 'home']"></fa-icon>
+		<span class="full-width" *ngIf="isExpanded">Dashboard</span>
+	</a>
 	<a [class.expanded]="isExpanded" class="parent" mat-list-item routerLinkActive="list-item-active" routerLink="personas" [routerLinkActiveOptions]="{exact: true}">
 		<fa-icon [icon]="['fas', 'user-friends']"></fa-icon>
 		<span class="full-width" *ngIf="isExpanded">Personas</span>
