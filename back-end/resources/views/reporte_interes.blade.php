@@ -259,7 +259,7 @@
                     </td>
                     <td width="98%">
                         Áreas de alto interés. Son aquellas áreas en las que la puntuación se encuentra
-                        por encima de 75, significa que tienes muy desarrollado este interés y sería
+                        por encima de 85, significa que tienes muy desarrollado este interés y sería
                         recomendable que la profesión que elijas se vincule a las carreras que estas
                         áreas incluyen.
                     </td>
@@ -269,7 +269,7 @@
                         <p style="position:absolute;top:-17px;">•</p>
                     </td>
                     <td width="98%">
-                        Áreas de mediano interés. Son aquellas áreas con puntuaciones entre 26 y 75.
+                        Áreas de mediano interés. Son aquellas áreas con puntuaciones entre 26 y 85.
                         Significa que tu interés no es tan desarrollado hacia estas actividades. En este
                         caso es recomendable que explores más las actividades relacionadas con estas
                         áreas.
@@ -312,10 +312,10 @@
                     <td width="29%">
                         Bajo
                     </td>
-                    <td width="29%">
+                    <td width="35%">
                         Medio
                     </td>
-                    <td width="29%">
+                    <td width="1%">
                         Alto
                     </td>
                 </tr>
@@ -380,8 +380,18 @@
                 </tr>
             </thead>
             <tbody>
+            @php
+                $mostrar_elemento = $puntajes_sort->firstWhere('puntaje', '>=', 85);
+                if (!$mostrar_elemento) {
+                    $mostrar_elemento = $puntajes_sort->sortByDesc('puntaje')->first();
+                    $puntajes_sort = [$mostrar_elemento];
+                } else {
+                    $puntajes_sort = $puntajes_sort->filter(function($p) {
+                        return $p->puntaje >= 85;
+                    });
+                }
+            @endphp
                 @foreach ($puntajes_sort as $p)
-                @if ($p->puntaje>75)
                 <tr>
                     <td width="30%" class="font-weight-bold text-center">
                         {{ $p->carrera->nombre }}
@@ -397,7 +407,6 @@
                         @endforeach
                     </td>
                 </tr>
-                @endif
                 @endforeach
             </tbody>
         </table>
