@@ -45,7 +45,7 @@ class EncuestaPersonaController extends Controller
                                 ->orWhere('personas.apellido_materno', "LIKE", "%$searchValue%")
                                 ->orWhere('personas.apellido_paterno', "LIKE", "%$searchValue%")
                                 ->orWhere('personas.sexo', "LIKE", "%$searchValue%")
-                                ->orWhere('personas.email', "LIKE", "%$searchValue%");
+                                ->orWhere('personas.correo', "LIKE", "%$searchValue%");
                         });
                 }]);
             }])
