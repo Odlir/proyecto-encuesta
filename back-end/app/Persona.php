@@ -15,7 +15,6 @@ class Persona extends Model
         'apellido_paterno',
         'sexo',
         'estado',
-        'email',
         'anio',
         'rol_id',
         'insert_user_id',

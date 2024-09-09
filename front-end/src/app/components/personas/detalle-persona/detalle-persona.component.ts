@@ -18,7 +18,6 @@ export class DetallePersonaComponent implements OnInit {
     apellido_materno: null,
     apellido_paterno: null,
     sexo: null,
-    email: null,
     insert_user_id: null,
     edit_user_id: null,
     insert: { name: null },

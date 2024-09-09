@@ -28,7 +28,7 @@ class PersonaController extends Controller
                     ->orWhere('apellido_materno', "LIKE", "%$searchValue%")
                     ->orWhere('apellido_paterno', "LIKE", "%$searchValue%")
                     ->orWhere('sexo', "LIKE", "%$searchValue%")
-                    ->orWhere('email', "LIKE", "%$searchValue%");
+                    ->orWhere('correo', "LIKE", "%$searchValue%");
             });
 
         if (!$paginate) {

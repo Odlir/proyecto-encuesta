@@ -20,7 +20,6 @@ class CreatePersonasTable extends Migration
             $table->string('apellido_paterno');
             $table->string('sexo');
             $table->char('estado', 1)->comment('0-Inactivo/1-Activo')->default(1);
-            $table->string('email')->nullable();
 
             $table->string('anio')->nullable();
 

@@ -9,5 +9,6 @@ export class ConstantsService {
 	//VULTR
 	 readonly apiUrl: string = 'https://www.gafencuestas.com/public/api/';
 
+
 	constructor() { }
 }

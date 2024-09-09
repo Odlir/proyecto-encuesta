@@ -17,13 +17,15 @@ export class CrudPersonaComponent implements OnInit {
     apellido_materno: null,
     apellido_paterno: null,
     sexo: null,
-    email: null,
     insert_user_id: this.user.me(),
     edit_user_id: null,
     insert: { name: null },
     edit: { name: '' },
     created_at: null,
-    updated_at: null
+    updated_at: null,
+		dni: null,
+		correo: null,
+		celular: null
   };
 
   public id: HttpParams;
