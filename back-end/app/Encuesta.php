@@ -44,4 +44,11 @@ class Encuesta extends Model
     {
         return $this->belongsTo('App\EncuestaGeneral', 'encuesta_general_id');
     }
+
+    public function encuesta_persona()
+    {
+        return $this->belongsTo('App\EncuestaPersona', 'encuesta_general_id');
+    }
+
+
 }

@@ -1,7 +1,11 @@
 <table>
     <thead>
         <tr>
+            <th>ID</th>
             <th>NOMBRE</th>
+            <th scope="col">DNI</th>
+            <th scope="col">CORREO</th>
+            <th scope="col">CELULAR</th>
             <th>STATUS CONSOLIDADO</th>
             <th>CONSOLIDADO</th>
             <th>STATUS INTERESES</th>
@@ -17,11 +21,15 @@
     <tbody>
         @foreach($personas as $p)
         <tr>
+            <td>{{ $p->id }}</td>
             <td>{{ $p->nombres }} {{ $p->apellido_paterno }} {{ $p->apellido_materno }}</td>
+            <td>{{ $p->dni }}</td>
+            <td>{{ $p->correo }}</td>
+            <td>{{ $p->celular }}</td>
             <td>@if ($p->link_consolidado)
                 Completado
                 @else
-                Pendiente    
+                Pendiente
                 @endif
             </td>
             <td> @if ($p->link_consolidado)

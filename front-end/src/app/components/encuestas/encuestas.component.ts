@@ -74,4 +74,18 @@ export class EncuestasComponent implements OnInit {
 		this.search = event.target.value;
 		this.fetch();
 	}
+
+	isActive(fechaInicio: string, fechaFin: string): string {
+		const today = new Date();
+		const startDate = new Date(fechaInicio);
+		const endDate = new Date(fechaFin);
+
+		return today >= startDate && today <= endDate ? 'Activo' : 'Inactivo';
+	}
+
+	countEncuestaPersona(encuestaPersona: any[]): number {
+		return encuestaPersona ? encuestaPersona.length : 0;
+	}
+
+    protected readonly Date = Date;
 }
