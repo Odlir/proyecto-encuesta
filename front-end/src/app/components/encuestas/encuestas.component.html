@@ -49,6 +49,29 @@
 				{{ value| date: 'dd/MM/yyyy' }}
 			</ng-template>
 		</ngx-datatable-column>
+		<ngx-datatable-column name="Estado" prop="estado">
+			<ng-template let-column="column" ngx-datatable-header-template>
+				{{ column.name }}
+			</ng-template>
+			<ng-template let-row="row" ngx-datatable-cell-template>
+				<div [ngClass]="{
+      'estado': true,
+      'activo': isActive(row.fecha_inicio, row.fecha_fin) === 'Activo',
+      'inactivo': isActive(row.fecha_inicio, row.fecha_fin) === 'Inactivo'
+    }">
+					{{ isActive(row.fecha_inicio, row.fecha_fin) }}
+				</div>
+			</ng-template>
+		</ngx-datatable-column>
+
+		<ngx-datatable-column name="Avance" prop="encuesta_persona">
+			<ng-template let-column="column" ngx-datatable-header-template>
+				{{ column.name }}
+			</ng-template>
+			<ng-template let-row="row" ngx-datatable-cell-template>
+				{{ countEncuestaPersona(row.encuesta_persona) }}
+			</ng-template>
+		</ngx-datatable-column>
 		<ngx-datatable-column name="Id">
 			<ng-template let-column="column" ngx-datatable-header-template> Acciones </ng-template>
 			<ng-template let-value="value" ngx-datatable-cell-template>

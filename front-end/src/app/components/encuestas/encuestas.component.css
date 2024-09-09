@@ -1,0 +1,15 @@
+.estado {
+	display: inline-block;
+	padding: 2px 8px; /* Ajusta el padding según tu preferencia */
+	border-radius: 3px;
+	color: white;
+	font-size: 10px; /* Ajusta el tamaño de fuente si es necesario */
+}
+
+.activo {
+	background-color: green;
+}
+
+.inactivo {
+	background-color: red;
+}
