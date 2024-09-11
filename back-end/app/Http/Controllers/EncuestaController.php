@@ -25,7 +25,8 @@ class EncuestaController extends Controller
         $data = Encuesta::with('empresa')
             ->with('tipo')
             ->with('general')
-            ->with('encuesta_persona')
+            ->withCount('encuesta_persona')
+            ->withCount('encuesta_puntaje')
             ->where('estado', '1')
             ->where(function ($query) use ($searchValue) {
                 $query->where("id", "LIKE", "%$searchValue%")
@@ -36,7 +37,6 @@ class EncuestaController extends Controller
                         $query->where("nombre", "LIKE", "%$searchValue%");
                     });
             });
-
 
         if (!$paginate) {
             $data = $data->count();

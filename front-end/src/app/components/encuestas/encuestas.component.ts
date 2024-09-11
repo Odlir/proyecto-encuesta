@@ -88,4 +88,16 @@ export class EncuestasComponent implements OnInit {
 	}
 
     protected readonly Date = Date;
+
+	calculateProgress(total: number, responded: number): number {
+		if (total === 0) {
+			return 0; // Evita la división por cero
+		}
+
+		return (responded / total) * 100;
+	}
+
+	getCircleClass(total: number, responded: number): string {
+		return this.calculateProgress(total, responded) >= 100 ? 'complete' : '';
+	}
 }

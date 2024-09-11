@@ -45,10 +45,20 @@ class Encuesta extends Model
         return $this->belongsTo('App\EncuestaGeneral', 'encuesta_general_id');
     }
 
+/*    public function encuesta_persona()
+    {
+        return $this->hasMany('App\EncuestaPersona', 'encuesta_general_id');
+    }*/
+
     public function encuesta_persona()
     {
-        return $this->belongsTo('App\EncuestaPersona', 'encuesta_general_id');
+        return $this->hasMany(EncuestaPersona::class, 'encuesta_general_id', 'encuesta_general_id')
+            ->where('estado', 1);
     }
 
+    public function encuesta_puntaje()
+    {
+        return $this->hasMany(EncuestaPuntaje::class, 'encuesta_id', 'id');
+    }
 
 }
