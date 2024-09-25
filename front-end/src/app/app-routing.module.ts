@@ -26,6 +26,8 @@ import {MenosDesarrolladosComponent} from './components/test-talentos/menos-desa
 import {EspecificosComponent} from './components/test-talentos/especificos/especificos.component';
 import {EspecificosMenosComponent} from './components/test-talentos/especificos-menos/especificos-menos.component';
 
+import { AnualReportComponent } from './components/anual-report/anual-report.component';
+
 const routes: Routes = [
 	{
 		path: '',
@@ -113,6 +115,11 @@ const routes: Routes = [
 	{
 		path: 'reportes',
 		component: ReportesComponent,
+		canActivate: [AfterLoginService]
+	},
+	{
+		path: 'reporte-anual',
+		component: AnualReportComponent,
 		canActivate: [AfterLoginService]
 	},
 	{

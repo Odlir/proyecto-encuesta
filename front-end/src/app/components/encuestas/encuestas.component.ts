@@ -100,4 +100,14 @@ export class EncuestasComponent implements OnInit {
 	getCircleClass(total: number, responded: number): string {
 		return this.calculateProgress(total, responded) >= 100 ? 'complete' : '';
 	}
+
+	getColorForProgress(progress: number): string {
+		if (progress < 50) {
+			return 'red';
+		} else if (progress < 80) {
+			return 'orange';
+		} else {
+			return 'green';
+		}
+	}
 }

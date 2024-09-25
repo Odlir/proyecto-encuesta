@@ -15,4 +15,13 @@ class EncuestaRespuesta extends Model
         'respuesta_id',
         'encuesta_puntaje_id',
     ];
+
+    public function pregunta() {
+        return $this->belongsTo(Pregunta::class);
+    }
+
+
+   public function respuesta() {
+        return $this->belongsTo(Respuesta::class);
+    }
 }

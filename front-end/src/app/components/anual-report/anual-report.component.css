@@ -1,0 +1,13 @@
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+	top: 5px;
+}
+
+.porcentaje {
+	padding-left: 1em;
+	font-size: 14px;
+	font-weight: bold;
+}

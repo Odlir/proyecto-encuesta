@@ -1,0 +1,92 @@
+<div class="container-fluid">
+	<app-header nombre="REPORTE ANUAL" icono="poll"></app-header>
+
+<div class="w-100">
+	<div class="form-group row my-3">
+		<label class="col-sm-1 col-form-label w-100 pt-4"
+			>Empresa <span class="text-danger">*</span></label
+		>
+		<div class="col-sm-4">
+			<autocomplete-object
+				[options]="empresas"
+				(optionSelected)="onChangeEmpresa($event)"
+				*ngIf="empresas.length"
+			>
+			</autocomplete-object>
+		</div>
+	</div>
+	<div class="form-group row mt-5 mx-0">
+		<button
+			type="submit"
+			class="btn btn-success d-flex"
+			(click)="downloadExcelStatus()"
+			[disabled]="disabledButtons"
+		>
+			<fa-icon [icon]="['fas', 'file-download']"></fa-icon> EXCEL STATUS
+		</button>
+		<button
+			type="submit"
+			class="btn btn-warning d-flex"
+			(click)="getSchoolsStatus()"
+			[disabled]="disabledButtons"
+		>
+			<fa-icon [icon]="['fas', 'file-download']"></fa-icon> VER STATUS
+		</button>
+	</div>
+
+	<div
+		class="table-responsive mt-2"
+		*ngIf="statusSchools && statusSchools.length"
+	>
+		<div class="d-md-flex">
+			<mat-form-field class="col-md-4 col-12">
+				<mat-label>Buscar</mat-label>
+				<input
+					matInput
+					(keyup)="getSchoolsStatus($event.target.value)"
+					placeholder="Buscar por Nombres/Apellidos"
+				/>
+			</mat-form-field>
+			<div class="col-md-8 col-12">
+				<label class="ml-md-3 font-weight-bold"
+					>TOTAL:&nbsp;{{ getTotal() }}</label
+				>
+				<span class="dot bg-danger ml-4 position-relative"></span>
+				<b class="ml-2">{{ getIncompleteSurveys() }}</b>
+				<span class="dot bg-success ml-4 position-relative"></span>
+				<b class="ml-2">{{ getCompleteSurveys() }}</b>
+				<span class="porcentaje"
+					>{{
+						(getCompleteSurveys() * 100) / getTotal() | number : "1.2-2"
+					}}
+					%</span
+				>
+			</div>
+		</div>
+		<table class="table table-hover text-center">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">COLEGIO</th>
+					<th scope="col">SÍ RESPONDIÓ</th>
+					<th scope="col">NO RESPONDIÓ</th>
+					<th scope="col">TOTAL</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of statusSchools">
+					<td>{{ item.id }}</td>
+					<td>{{ item.colegio }}</td>
+					<td>
+						{{ item.respondio }}
+					</td>
+					<td>
+						{{ item.noRespondio }}
+					</td>
+					<td>{{ item.total }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>

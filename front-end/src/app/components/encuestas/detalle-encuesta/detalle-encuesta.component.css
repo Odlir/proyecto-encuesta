@@ -1,0 +1,20 @@
+
+.progress-circle {
+	width: 10px;
+	height: 10px;
+	display: flex;
+	align-items: center;
+	padding: 15px;
+	justify-content: center;
+	color: white;
+	border-radius: 100%;
+	margin-left: 2%;
+}
+
+.progress-text {
+	z-index: 1;
+	color: white;
+	font-size: 10px;
+	text-align: center;
+}
+

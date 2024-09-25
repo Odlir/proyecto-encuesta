@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\EmpresaSucursal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Encuesta;
 use App\EncuestaGeneral;
 use App\TipoEncuesta;
+use App\Exports\AnualReport;
+use App\Exports\LinkExport;
+use App\Exports\StatusExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EncuestaController extends Controller
 {
@@ -62,7 +68,7 @@ class EncuestaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -97,7 +103,7 @@ class EncuestaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -105,6 +111,8 @@ class EncuestaController extends Controller
         $data = Encuesta::with('insert')
             ->with('edit')
             ->with('empresa')
+            ->withCount('encuesta_persona')
+            ->withCount('encuesta_puntaje')
             ->with(['general' => function ($query) {
                 $query->with(['personas' => function ($query) {
                     $query->wherePivot('estado', '1');
@@ -120,7 +128,7 @@ class EncuestaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -131,8 +139,8 @@ class EncuestaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -153,7 +161,7 @@ class EncuestaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -163,5 +171,89 @@ class EncuestaController extends Controller
         $registro->save();
 
         return response()->json($registro, 200);
+    }
+
+    public function getStatusSchoolsByEmpresaId($id, $searchValue = '')
+    {
+
+        $sucursales = Encuesta::
+             where('tipo_encuesta_id', '1')
+            ->with('empresa')
+            ->withCount('encuesta_puntaje')
+            ->withCount('encuesta_persona')
+            ;
+
+
+        if ($id != 'all') {
+            $sucursales = $sucursales->whereHas('empresa', function ($query) use ($id) {
+                $query->where('empresa_id', $id);
+            });
+        } else if ($searchValue != '') {
+            $sucursales = $sucursales->whereHas('empresa', function ($query) use ($searchValue) {
+                $query->where('nombre', 'LIKE', "%$searchValue%");
+            });
+        }
+
+        $sucursales = $sucursales->get();
+
+        $studentsBySchool = $sucursales->groupBy('empresa.nombre')->map(function ($groupedSchools, $schoolName) {
+            $totalEncuestasPersona = $groupedSchools->sum('encuesta_persona_count');
+            $totalEncuestasPersonaRespondidas = $groupedSchools->sum('encuesta_puntaje_count');
+            if ($groupedSchools->isNotEmpty()) {
+                // Obtener el primer elemento y acceder a la relación empresa
+                $firstSchool = $groupedSchools->first();
+                $empresaId = $firstSchool->empresa ? $firstSchool->empresa->empresa_id : null; // Comprobar si empresa existe
+            } else {
+                $empresaId = null; // Si no hay escuelas, asignar null
+            }
+            $noRespondio =  $totalEncuestasPersona - $totalEncuestasPersonaRespondidas;
+
+            return [
+                'id' => $empresaId,
+                'colegio' => $schoolName,
+                'respondio' => $totalEncuestasPersonaRespondidas,
+                'noRespondio' => $noRespondio,
+                'total' =>$totalEncuestasPersona
+            ];
+
+        })->values()->toArray();
+
+
+
+
+        return $studentsBySchool;
+    }
+
+    public function getAnualReportExcelByEmpresaId(Request $request)
+    {
+        return Excel::download(new AnualReport($this->getStatusSchoolsByEmpresaId($request['empresa_id'])), 'colegios.xlsx');
+    }
+
+    public function getStatusSchools(Request $request)
+    {
+        return response()->json($this->getStatusSchoolsByEmpresaId($request->input('empresa_id'), $request->input('searchValue')), 200);
+    }
+
+    public function getExcelStatusByEncuestaId(Request $request)
+    {
+        $encuesta = $this->getEncuestaWithPersonas($request['encuesta_id']);
+
+        if ($encuesta['personas']->isEmpty()) {
+            return response()->json(['error' => 'No hay alumnos registrados'], 400);
+        }
+
+
+        return Excel::download(new StatusExport($encuesta['personas']), 'encuesta.xlsx');
+    }
+
+    public function getEncuestaWithPersonas($id)
+    {
+        return Encuesta::where('id', $id)
+            ->with([
+                'personas' => function ($query) {
+                    $query->wherePivot('estado', '1');
+                }
+            ])
+            ->first();
     }
 }

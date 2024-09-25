@@ -59,6 +59,8 @@ import { MasDesarrolladosComponent } from './components/test-talentos/mas-desarr
 import { MenosDesarrolladosComponent } from './components/test-talentos/menos-desarrollados/menos-desarrollados.component';
 import { EspecificosComponent } from './components/test-talentos/especificos/especificos.component';
 import { EspecificosMenosComponent } from './components/test-talentos/especificos-menos/especificos-menos.component';
+import { AnualReportComponent } from './components/anual-report/anual-report.component';
+import { AutocompleteObjectComponent } from './components/partials/autocomplete-object/autocomplete-object.component';
 
 @NgModule({
 	declarations: [
@@ -92,7 +94,9 @@ import { EspecificosMenosComponent } from './components/test-talentos/especifico
 		MasDesarrolladosComponent,
 		MenosDesarrolladosComponent,
 		EspecificosComponent,
-		EspecificosMenosComponent
+		EspecificosMenosComponent,
+		AnualReportComponent,
+		AutocompleteObjectComponent
 	],
 	imports: [
 		BrowserModule,
