@@ -137,24 +137,38 @@ class DashboardController extends Controller
 
     public function getPieSchools()
     {
-        $schools = Encuesta::whereYear('created_at', Carbon::now()->year)
+      /*  $schools = Encuesta::whereYear('created_at', Carbon::now()->year)
             ->whereMonth('created_at', Carbon::now()->month)
             ->where('tipo_encuesta_id', '1')
             ->with('empresa')
             ->with('encuesta_puntaje')
             ->withCount('encuesta_persona')
-            ->get();
+            ->get();*/
+
+        /*
+                //$p_intereses = EncuestaPuntaje::with('punintereses.carrera')->get();
+
+                $studentsBySchool = $schools->groupBy('empresa.nombre')->map(function ($groupedSchools, $schoolName) {
+                    $totalEncuestasPersona = $groupedSchools->sum('encuesta_persona_count');
+                    return [
+                        'schoolName' => $schoolName,
+                        'quantity' => $totalEncuestasPersona
+                    ];
+                })->values()->toArray();*/
+
+        $companiesCount  =  Encuesta::whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->where('tipo_encuesta_id', '1')
+            ->groupBy('empresa_sucursal_id')
+            ->count();
 
 
-        //$p_intereses = EncuestaPuntaje::with('punintereses.carrera')->get();
+       // $totalEncuestasPersona = $schools->sum('encuesta_persona_count'); // Sumar todos los valores de 'encuesta_persona_count'
 
-        $studentsBySchool = $schools->groupBy('empresa.nombre')->map(function ($groupedSchools, $schoolName) {
-            $totalEncuestasPersona = $groupedSchools->sum('encuesta_persona_count');
-            return [
-                'schoolName' => $schoolName,
-                'quantity' => $totalEncuestasPersona
-            ];
-        })->values()->toArray();
+        $studentsBySchool = [[
+            'schoolName' => 'Cantidad',
+            'quantity' => $companiesCount // Total de la suma
+        ]];
 
         return response()->json($studentsBySchool, 200);
     }

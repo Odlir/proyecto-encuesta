@@ -119,7 +119,7 @@ export class DashboardComponent implements OnInit {
 		responsive: true,
 		title: {
 			display: true,
-			text: 'Areas mas seleccionadas',
+			text: 'Áreas más seleccionadas',
 			fontSize: 16,
 		}
 	};
@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
 		responsive: true,
 		title: {
 			display: true,
-			text: 'Alumnos encuestados el último mes agrupados por Colegio',
+			text: 'Cantidad de Colegios encuestados el último mes',
 			fontSize: 16,
 		}
 	};
@@ -137,7 +137,7 @@ export class DashboardComponent implements OnInit {
 	public pieChartCarrersData: number[] = [];
 	public pieChartSchoolsLabels: Label[] = [];
 	public pieChartSchoolsData: number[] = [];
-
+	public pieChartSchoolsColors: string[] = [];
 	/* END PIE CHART  */
 
 	public barChartCreatedSurveysOptions: ChartOptions = {
@@ -248,6 +248,7 @@ export class DashboardComponent implements OnInit {
 			dashboardPieSchools.forEach((school) => {
 				this.pieChartSchoolsLabels.push(school.schoolName);
 				this.pieChartSchoolsData.push(school.quantity);
+
 			});
 
 			if(!dashboardPieSchools.length || dashboardPieSchools.every(school => school.quantity === 0)) {
