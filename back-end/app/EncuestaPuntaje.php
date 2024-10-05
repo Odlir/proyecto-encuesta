@@ -23,6 +23,11 @@ class EncuestaPuntaje extends Model
         return $this->belongsTo('App\Persona');
     }
 
+    public function encuesta_persona()
+    {
+        return $this->hasMany('App\EncuestaPersona', 'persona_id');
+    }
+
     public function punintereses()
     {
         return $this->hasMany('App\CarreraPuntaje','encuesta_puntaje_id');

@@ -17,5 +17,11 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => 'adminadmin'
         ]);
+
+        User::create([
+            'name' => 'carrier',
+            'email' => 'carrier@carrier.com',
+            'password' => 'carrier.carrier'
+        ]);
     }
 }

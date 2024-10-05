@@ -35,9 +35,10 @@ class DashboardController extends Controller
 
                 $newSurveys = Encuesta::whereYear('created_at', Carbon::now()->year)
                     ->whereMonth('created_at', Carbon::now()->month)
+                    ->where('estado', '1')
                     ->count();
 
-               $carreras = $this->getCarrersPoints();
+               $carreras = $this->getCarrersPointss();
 
              $topCarrers = array_slice($carreras, 0, 3);
                 $topCarrersConcatened = implode(', ', array_column($topCarrers, 'nombre'));
@@ -54,11 +55,15 @@ class DashboardController extends Controller
 
     }
 
-    public function getCarrersPoints()
+    public function getCarrersPointss()
     {
- /*       $carreras = [];
+    /* $carreras = [];
 
-        $p_intereses = EncuestaPuntaje::with('punintereses.carrera')->get();
+      $p_intereses = EncuestaPuntaje::
+      with('punintereses.carrera')
+          ->with('encuesta_persona')
+          ->where('completada', 1)->get();
+
 
         $total_intereses = [];
         $puntajes_intereses = [];
@@ -67,7 +72,6 @@ class DashboardController extends Controller
             // Agregar todos los punintereses de este EncuestaPuntaje al array total_intereses
             foreach ($encuestaPuntaje->punintereses as $puninteres) {
                 $total_intereses[] = $puninteres;
-
             }
         }
 
@@ -90,8 +94,43 @@ class DashboardController extends Controller
             return $b['puntaje'] <=> $a['puntaje'];
         });*/
 
-        $carreras = [];
-        return ($carreras);
+     $carreras = [];
+        $year = Carbon::now()->year;
+        $encuestasCompletadas = EncuestaPersona::whereNotNull('created_at')
+            ->whereYear('created_at', $year)
+            ->with('persona')
+            ->with('respuestas.pregunta.carrera')
+            ->with('respuestas.respuesta')
+
+            ->where('completada', '1')->get();
+
+        foreach ($encuestasCompletadas as $encuestaPersona) {
+            foreach ($encuestaPersona->respuestas as $respuesta) {
+                $carrera_id = $respuesta->pregunta->carrera->id ?? null;
+                $carrera_nombre = $respuesta->pregunta->carrera->nombre ?? null;
+                $puntaje = (int) ($respuesta->respuesta->puntaje ?? 0);
+
+                // Buscar si la carrera ya existe dentro de la facultad
+                if($carrera_id != ''){
+                if (!isset($carreras[$carrera_id])) {
+                    $carreras[$carrera_id] = [
+                        'carrera_id' => $carrera_id,
+                        'nombre' => $carrera_nombre,
+                        'puntaje' => 0
+                    ];
+                }
+
+                // Sumar el puntaje a la carrera correspondiente
+                $carreras[$carrera_id]['puntaje'] += $puntaje;
+                }
+            }
+        }
+
+        usort($carreras, function ($a, $b) {
+            return $b['puntaje'] <=> $a['puntaje'];
+        });
+
+        return array_values($carreras);
 
 
     }
@@ -99,7 +138,7 @@ class DashboardController extends Controller
 
     public function getPieCarrers()
     {
-        $carreras = $this->getCarrersPoints();
+        $carreras = $this->getCarrersPointss();
 
         // Tomar las 4 primeras carreras
         $topCarrers = array_slice($carreras, 0, 4);
@@ -159,6 +198,7 @@ class DashboardController extends Controller
         $companiesCount  =  Encuesta::whereYear('created_at', Carbon::now()->year)
             ->whereMonth('created_at', Carbon::now()->month)
             ->where('tipo_encuesta_id', '1')
+            ->where('estado', '1')
             ->groupBy('empresa_sucursal_id')
             ->count();
 
@@ -186,6 +226,7 @@ class DashboardController extends Controller
                 DB::raw('MONTH(created_at) as month'),
                 DB::raw('COUNT(*) as count')
             )
+            ->where('estado', 1)
             ->whereIn(DB::raw('YEAR(created_at)'), [$currentYear, $lastYear])
             ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
             ->orderBy(DB::raw('MONTH(created_at)'))
@@ -210,39 +251,40 @@ class DashboardController extends Controller
 
     public function getBarCompletedSurveys()
     {
+
         $currentYear = Carbon::now()->year;
         $lastYear = $currentYear - 1;
 
         $results = [
             'resueltas' => [
-                'añoAnterior' => $this->getSurveysStatus($lastYear, true),
-                'añoActual' => $this->getSurveysStatus($currentYear, true),
+                'anioAnterior' => $this->getSurveysStatus($lastYear, true),
+                'anioActual' => $this->getSurveysStatus($currentYear, true),
             ],
             'noResueltas' => [
-                'añoAnterior' => $this->getSurveysStatus($lastYear, false),
-                'añoActual' => $this->getSurveysStatus($currentYear, false),
+                'anioAnterior' => $this->getSurveysStatus($lastYear, false),
+                'anioActual' => $this->getSurveysStatus($currentYear, false),
             ]
         ];
 
         return response()->json([
             [
-                'data' => $results['resueltas']['añoAnterior'],
-                'label' => 'Año anterior: resueltas',
+                'data' => $results['resueltas']['anioAnterior'],
+                'label' => 'Anio anterior: resueltas',
                 'stack' => 'a'
             ],
             [
-                'data' => $results['noResueltas']['añoAnterior'],
-                'label' => 'Año anterior: no resueltas',
+                'data' => $results['noResueltas']['anioAnterior'],
+                'label' => 'Anio anterior: no resueltas',
                 'stack' => 'a'
             ],
             [
-                'data' => $results['resueltas']['añoActual'],
-                'label' => 'Año actual: resueltas',
+                'data' => $results['resueltas']['anioActual'],
+                'label' => 'Anio actual: resueltas',
                 'stack' => 'b'
             ],
             [
-                'data' => $results['noResueltas']['añoActual'],
-                'label' => 'Año actual: no resueltas',
+                'data' => $results['noResueltas']['anioActual'],
+                'label' => 'Anio actual: no resueltas',
                 'stack' => 'b'
             ],
         ], 200);
@@ -251,51 +293,26 @@ class DashboardController extends Controller
     private function getSurveysStatus($year, $completed)
     {
 
+        $surveys = EncuestaPersona::select(
+            DB::raw('MONTH(IFNULL(fecha_completada, created_at)) as mes'),
+            DB::raw('COUNT(*) as total')
+        )
+            ->when($completed, function ($query) use ($year) {
+                $query->whereYear('fecha_completada', $year)
+                    ->whereNotNull('fecha_completada');
+            }, function ($query) use ($year) {
+                $query->whereYear('created_at', $year)
+                    ->whereNull('fecha_completada');
+            })
+            ->groupBy('mes')
+            ->orderBy('mes')
+            ->pluck('total', 'mes')
+            ->toArray();
 
-/*        $data = Encuesta::with('empresa')
-            ->with('tipo')
-            ->with('general')
-            ->with('encuesta_puntaje')
-            ->withCount('encuesta_persona')
-            ->withCount('encuesta_puntaje')
-            ->where('estado', '1')->get();
-
-        if ($completed) {
-            $matchingSurveys = $data->filter(function ($encuesta) {
-                return $encuesta->encuesta_persona_count == $encuesta->encuesta_puntaje_count;
-            });
-
-            $puntajesPorMes = DB::table('encuesta_puntaje')
-                ->select(DB::raw('MONTH(created_at) as mes'), DB::raw('COUNT(*) as total'))
-                ->whereIn('encuesta_id', $matchingSurveys->pluck('id')) // Asegúrate de que encuesta_id exista en encuesta_puntaje
-                ->whereYear('created_at', $year)
-                ->groupBy(DB::raw('MONTH(created_at)')) // Agrupar por mes
-                ->orderBy('mes') // Ordenar por mes
-                ->pluck('total', 'mes') // Obtener un array con mes como clave y total como valor
-                ->toArray();
-        } else {
-            $matchingSurveys = $data->filter(function ($encuesta) {
-                return $encuesta->encuesta_persona_count != $encuesta->encuesta_puntaje_count; // Excluyendo los que cumplen la condición
-            });
-
-            // Obtenemos los puntajes por mes utilizando la tabla `encuestas`
-            $puntajesPorMes = DB::table('encuestas') // Cambiamos la tabla a `encuestas`
-            ->select(DB::raw('MONTH(created_at) as mes'), DB::raw('COUNT(*) as total'))
-                ->whereIn('id', $matchingSurveys->pluck('id')) // Usamos `id` ya que estamos en la tabla `encuestas`
-                ->whereYear('created_at', $year)
-                ->groupBy(DB::raw('MONTH(created_at)'))
-                ->orderBy('mes')
-                ->pluck('total', 'mes')
-                ->toArray();
-        }*/
-
-
-       $result = array_fill(0, 12, 0);
-
-        // Llenar el array con los valores obtenidos
-     /*   foreach ($puntajesPorMes as $mes => $total) {
+        $result = array_fill(0, 12, 0);
+        foreach ($surveys as $mes => $total) {
             $result[$mes - 1] = $total;
-        }*/
+        }
 
         return array_values($result);
     }

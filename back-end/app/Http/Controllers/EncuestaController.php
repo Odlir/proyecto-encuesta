@@ -173,26 +173,39 @@ class EncuestaController extends Controller
         return response()->json($registro, 200);
     }
 
-    public function getStatusSchoolsByEmpresaId($id, $searchValue = '')
+    public function getStatusSchoolsByEmpresaId($id, $searchValue = '', $fecha_inicio,$fecha_final)
     {
 
-        $sucursales = Encuesta::
-             where('tipo_encuesta_id', '1')
-            ->with('empresa')
-            ->withCount('encuesta_puntaje')
-            ->withCount('encuesta_persona')
-            ;
+        if ($fecha_inicio) {
+         /*   $startOfMonth = Carbon::parse($fecha_inicio . '-01')->startOfMonth();
+            $endOfMonth = Carbon::parse($fecha_inicio . '-01')->endOfMonth();*/
+
+            $sucursales = Encuesta::
+            where('tipo_encuesta_id', '1')
+                ->with('empresa')
+                ->where('estado', '1')
+                ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
+                ->withCount('encuesta_puntaje')
+                ->withCount('encuesta_persona');
+        }else{
+            $sucursales = Encuesta::
+            where('tipo_encuesta_id', '1')
+                ->with('empresa')
+                ->where('estado', '1')
+                ->withCount('encuesta_puntaje')
+                ->withCount('encuesta_persona');
+        }
+
 
 
         if ($id != 'all') {
-            $sucursales = $sucursales->whereHas('empresa', function ($query) use ($id) {
-                $query->where('empresa_id', $id);
-            });
-        } else if ($searchValue != '') {
-            $sucursales = $sucursales->whereHas('empresa', function ($query) use ($searchValue) {
-                $query->where('nombre', 'LIKE', "%$searchValue%");
-            });
-        }
+            $sucursales = $sucursales->where('empresa_sucursal_id', $id); // Filtrar por ID de la empresa
+        }elseif($searchValue != '') {
+                $sucursales = $sucursales->whereHas('empresa', function ($query) use ($searchValue) {
+                    $query->where('nombre', 'LIKE', "%$searchValue%"); // Filtrar por nombre de la empresa
+                });
+            }
+
 
         $sucursales = $sucursales->get();
 
@@ -226,12 +239,12 @@ class EncuestaController extends Controller
 
     public function getAnualReportExcelByEmpresaId(Request $request)
     {
-        return Excel::download(new AnualReport($this->getStatusSchoolsByEmpresaId($request['empresa_id'])), 'colegios.xlsx');
+        return Excel::download(new AnualReport($this->getStatusSchoolsByEmpresaId($request['empresa_id'], $request->input('searchValue'), $request->input('fecha_inicio'), $request->input('fecha_final'))), 'colegios.xlsx');
     }
 
     public function getStatusSchools(Request $request)
     {
-        return response()->json($this->getStatusSchoolsByEmpresaId($request->input('empresa_id'), $request->input('searchValue')), 200);
+        return response()->json($this->getStatusSchoolsByEmpresaId($request->input('empresa_id'), $request->input('searchValue'), $request->input('fecha_inicio'), $request->input('fecha_final') ), 200);
     }
 
     public function getExcelStatusByEncuestaId(Request $request)

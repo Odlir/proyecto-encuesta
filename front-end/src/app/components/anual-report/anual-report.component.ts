@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 /*import { ApiService } from 'src/app/Services/api/api.service';*/
 import { ApiBackRequestService } from './../../Services/api-back-request.service';
 import Swal from 'sweetalert2';
 import {NgProgress,NgProgressRef} from "ngx-progressbar";
+import * as moment from 'moment';
+
 
 export interface Empresa {
 	nombre: string;
@@ -16,6 +18,10 @@ export interface Empresa {
 	styleUrls: ['./anual-report.component.css'],
 })
 export class AnualReportComponent implements OnInit {
+	@ViewChild('dateRangeInput') dateRangeInput!: ElementRef; // Acceso al input
+	dateRange: string; // Asume que tienes este campo
+
+
 	empresas: any[] = [];
 	empresa: Empresa = {
 		id: null,
@@ -26,6 +32,23 @@ export class AnualReportComponent implements OnInit {
 	public progressRef: NgProgressRef;
 	constructor(private api: ApiBackRequestService, private router: Router, public ngProgress: NgProgress) {
 		this.progressRef = ngProgress.ref();
+		this.dateRange = `${moment().startOf('year').format('DD-MM-YYYY')} - ${moment().format('DD-MM-YYYY')}`; // Formato como cadena
+		this.options = {
+			opens: 'left',
+			locale: {
+				format: 'DD-MM-YYYY',
+			},
+			startDate: moment().startOf('year'),
+			endDate: moment(),
+			maxSpan: {
+				days: 365
+			},
+			ranges: {
+				'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
+				'Este mes': [moment().startOf('month'), moment().endOf('month')],
+				'Último mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+			}
+		};
 	}
 	ngOnInit() {
 		this.api.get('empresa_sucursal').subscribe((data) => {
@@ -40,19 +63,39 @@ export class AnualReportComponent implements OnInit {
 		});
 	}
 
+	options: any = {
+		locale: { format: 'DD/MM/YYYY' },
+		startDate: moment().startOf('year').format('DD/MM/YYYY'), // Inicio del año actual
+		endDate: moment().format('DD/MM/YYYY'),
+	};
+
+	onDateRangeChange(value: string) {
+
+		this.dateRange = value;
+	}
+
 	onChangeEmpresa($event) {
 		this.empresa.id = $event.id;
 		this.empresa.nombre = $event.nombre;
 		this.statusSchools = [];
 	}
 
-	downloadExcelStatus() {
+	downloadExcelStatus(dateRangeInput: HTMLInputElement) {
+		const inputText = dateRangeInput.value; // Obtener el texto visible en el input
+		const [startDate, endDate] = inputText.split(' - ');
+		const fecha_inicio = moment(startDate, 'DD-MM-YYYY').format('YYYY-MM-DD');
+		const fecha_final = moment(endDate, 'DD-MM-YYYY').format('YYYY-MM-DD');
+		console.log('Fecha de inicio:', startDate);
+
+
 		if (!this.empresa.id) {
 			this.mensaje('Por favor complete los campos requeridos');
 		} else {
 			this.disabledButtons = true;
 			const request = {
 				empresa_id: this.empresa.id,
+				fecha_inicio: fecha_inicio,
+				fecha_final: fecha_final,
 				archivo:
 					this.empresa.nombre +
 					'-REPORTE-ANUAL-STATUS.xlsx',
@@ -70,18 +113,30 @@ export class AnualReportComponent implements OnInit {
 		}
 	}
 
-	getSchoolsStatus(searchValue = '') {
+	getSchoolsStatus(dateRangeInput: HTMLInputElement) {
+		const inputText = dateRangeInput.value; // Obtener el texto visible en el input
+		const [startDate, endDate] = inputText.split(' - ');
+		const fecha_inicio = moment(startDate, 'DD-MM-YYYY').format('YYYY-MM-DD');
+		const fecha_final = moment(endDate, 'DD-MM-YYYY').format('YYYY-MM-DD');
+		console.log('Fecha de inicio:', startDate);
+
+
 		if (!this.empresa.id) {
 			this.mensaje('Por favor complete los campos requeridos');
-		} else {
+		}
+		 else {
 			this.disabledButtons = true;
-			this.api.get(
-					`getStatusSchools?empresa_id=${this.empresa.id}&searchValue=${searchValue}`
-				)
+			const params = `empresa_id=${this.empresa.id}&searchValue=${''}&fecha_inicio=${fecha_inicio}&fecha_final=${fecha_final}`;
+			this.api.get(`getStatusSchools?${params}`)
 				.subscribe(
 					(data) => {
 						this.statusSchools = data;
+						// Verifica si no hay datos
+						if (!this.statusSchools || this.statusSchools.length === 0) {
+							this.showNoDataAlert(); // Llama a la función para mostrar el modal
+						}
 						this.disabledButtons = false;
+
 					},
 					(error) => {
 						this.disabledButtons = false;
@@ -91,12 +146,29 @@ export class AnualReportComponent implements OnInit {
 		}
 	}
 
+	showNoDataAlert() {
+		Swal.fire({
+			title: 'No se encontraron datos',
+			text: 'No se encontraron datos con los filtros requeridos.',
+			icon: 'info', // Cambia el icono según tu preferencia
+			confirmButtonText: 'Aceptar',
+		});
+	}
+
 	getTotal() {
 		let total = 0;
 		if (this.statusSchools) {
 			this.statusSchools.forEach((school) => {
 				total += school.total;
 			});
+		}
+		return total;
+	}
+
+	getTotalSchools() {
+		let total = 0;
+		if (this.statusSchools) {
+			total = this.statusSchools.length;
 		}
 		return total;
 	}

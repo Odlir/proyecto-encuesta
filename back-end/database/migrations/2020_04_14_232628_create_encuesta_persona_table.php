@@ -24,6 +24,11 @@ class CreateEncuestaPersonaTable extends Migration
             $table->unsignedBigInteger('encuesta_general_id');
             $table->foreign('encuesta_general_id')->references('id')->on('encuesta_general');
 
+
+            $table->char('completada')->comment('0-Incompleta/1-Completa')->default(0);
+
+            $table->date('fecha_completada')->nullable();
+
             $table->unsignedBigInteger('insert_user_id')->comment('Usuario que hizo el registro');
             $table->foreign('insert_user_id')->references('id')->on('users');
 

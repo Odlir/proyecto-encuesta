@@ -119,10 +119,21 @@ export class DashboardComponent implements OnInit {
 		responsive: true,
 		title: {
 			display: true,
-			text: 'Áreas más seleccionadas',
+			text: '%  Áreas más seleccionadas',
 			fontSize: 16,
+		},
+		plugins: {
+			datalabels: {
+				color: 'black',
+				font: {
+					weight: 'bold',
+				},
+			},
+
 		}
 	};
+
+
 
 	public pieChartSchoolsOptions: ChartOptions = {
 		responsive: true,
@@ -130,6 +141,15 @@ export class DashboardComponent implements OnInit {
 			display: true,
 			text: 'Cantidad de Colegios encuestados el último mes',
 			fontSize: 16,
+		},
+		plugins: {
+			datalabels: {
+				color: 'black',
+				font: {
+					weight: 'bold',
+				},
+			},
+
 		}
 	};
 
@@ -155,8 +175,13 @@ export class DashboardComponent implements OnInit {
 			datalabels: {
 				anchor: 'end',
 				align: 'end',
+				color: 'black',
+				font: {
+					weight: 'bold',
+				},
 			},
 		},
+
 	};
 
 	public barChartCompletedSurveysOptions: ChartOptions = {
@@ -174,6 +199,10 @@ export class DashboardComponent implements OnInit {
 			datalabels: {
 				anchor: 'end',
 				align: 'end',
+				color: 'black',
+				font: {
+					weight: 'bold',
+				},
 			},
 		},
 	};
