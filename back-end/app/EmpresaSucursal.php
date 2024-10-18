@@ -45,4 +45,14 @@ class EmpresaSucursal extends Model
     {
         return $this->belongsTo('App\Empresa');
     }
+
+    public function encuestasGeneral()
+    {
+        return $this->hasMany('App\Encuesta', 'empresa_sucursal_id')
+            ;
+    }
+
+
+
+
 }

@@ -1417,6 +1417,7 @@ class ExportController extends Controller
 
     public function pdf_intereses($interes_id, $persona_id)
     {
+
         $carreras = Carrera::where('estado', 1)->orderBy('nombre', 'asc')
             ->get();
 

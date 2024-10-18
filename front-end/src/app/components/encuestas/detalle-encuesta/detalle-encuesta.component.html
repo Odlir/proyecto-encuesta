@@ -31,6 +31,9 @@
 								Tipo de Encuesta
 							</div>
 							<div class="col-12 border-bottom py-3">
+								Avance
+							</div>
+							<div class="col-12 border-bottom py-3">
 								Fecha de Inicio
 							</div>
 							<div class="col-12 border-bottom py-3">
@@ -49,6 +52,14 @@
 							</div>
 							<div class="col-12 border-bottom py-3">
 								{{form.tipo.nombre}}
+							</div>
+							<div class="col-12 border-bottom py-3"
+								class="progress-circle"
+								[style.background-color]="getColorForProgress(calculateProgress(form.encuesta_persona_count, form.encuesta_puntaje_count))"
+							>
+    <span class="progress-text">
+      {{ calculateProgress(form.encuesta_persona_count, form.encuesta_puntaje_count) | number:'1.0-2' }}%
+    </span>
 							</div>
 							<div class="col-12 border-bottom py-3">
 								{{form.fecha_inicio}}

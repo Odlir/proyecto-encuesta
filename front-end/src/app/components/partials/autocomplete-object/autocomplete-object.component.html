@@ -1,0 +1,21 @@
+<mat-form-field class="w-100">
+	<input
+		matInput
+		type="text"
+		class="form-control"
+		[formControl]="inputCtrl"
+		[matAutocomplete]="auto"
+	/>
+	<mat-autocomplete
+		#auto="matAutocomplete"
+		[displayWith]="displayLabelFn"
+		(optionSelected)="optionSelected.emit($event.option.value)"
+	>
+		<mat-option
+			*ngFor="let option of filteredOptions | async; trackBy: trackByIdFn"
+			[value]="option"
+		>
+			{{ option.label }}
+		</mat-option>
+	</mat-autocomplete>
+</mat-form-field>

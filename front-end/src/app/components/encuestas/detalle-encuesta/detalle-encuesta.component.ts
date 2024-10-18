@@ -27,7 +27,9 @@ export class DetalleEncuestaComponent implements OnInit {
     created_at: null,
     updated_at: null,
     empresa: { nombre: null },
-    tipo: { nombre: null }
+    tipo: { nombre: null },
+	  encuesta_persona_count: null,
+	  encuesta_puntaje_count: null,
   }
 
   public id: HttpParams;
@@ -48,7 +50,8 @@ export class DetalleEncuestaComponent implements OnInit {
 
   cargar(id) {
     this.api.get('encuestas', id).subscribe(
-      (data) => {
+
+      (data) => {	console.log(data);
         this.form = data
         this.form.fecha_inicio = moment(this.form.fecha_inicio).format('DD/MM/YYYY')
         this.form.fecha_fin = moment(this.form.fecha_fin).format('DD/MM/YYYY')
@@ -74,4 +77,26 @@ export class DetalleEncuestaComponent implements OnInit {
       }
     })
   }
+
+	calculateProgress(total: number, responded: number): number {
+		if (total === 0) {
+			return 0; // Evita la división por cero
+		}
+
+		return (responded / total) * 100;
+	}
+
+	getCircleClass(total: number, responded: number): string {
+		return this.calculateProgress(total, responded) >= 100 ? 'complete' : '';
+	}
+
+	getColorForProgress(progress: number): string {
+		if (progress < 50) {
+			return 'red';
+		} else if (progress < 80) {
+			return 'orange';
+		} else {
+			return 'green';
+		}
+	}
 }

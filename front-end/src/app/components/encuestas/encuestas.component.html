@@ -67,11 +67,11 @@
 			<ng-template let-row="row" ngx-datatable-cell-template>
 				<div
 					class="progress-circle"
-					[style.background-color]="calculateProgress(row.encuesta_persona_count, row.encuesta_puntaje_count) >= 100 ? 'green' : 'red'"
+					[style.background-color]="getColorForProgress(calculateProgress(row.encuesta_persona_count, row.encuesta_puntaje_count))"
 				>
-					  <span class="progress-text">
-					{{ calculateProgress(row.encuesta_persona_count, row.encuesta_puntaje_count)}}%
-        </span>
+    <span class="progress-text">
+      {{ calculateProgress(row.encuesta_persona_count, row.encuesta_puntaje_count) | number:'1.0-2' }}%
+    </span>
 				</div>
 			</ng-template>
 		</ngx-datatable-column>

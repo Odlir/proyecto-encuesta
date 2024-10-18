@@ -4,6 +4,8 @@ use App\Http\Controllers\UbigeoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EncuestaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,17 @@ Route::group([
     Route::get('/departamentos', [UbigeoController::class, 'getDepartamentos'])->name('getDepartamentos');
     Route::get('/provincias/{id}', [UbigeoController::class, 'getProvinciaByDepartamentoId'])->name('getProvincias');
     Route::get('/distritos/{id}', [UbigeoController::class, 'getDistritoByProvinciaId'])->name('getDistritos');
+
+    Route::get('dashboardCards', [DashboardController::class, 'getCards'])->name('getDashboardCards');
+    Route::get('dashboardPieCarrers', [DashboardController::class, 'getPieCarrers'])->name('getDashboardPieCarrers');
+    Route::get('dashboardPieSchools', [DashboardController::class, 'getPieSchools'])->name('getDashboardPieSchools');
+    Route::get('dashboardBarCreatedSurveys', [DashboardController::class, 'getBarCreatedSurveys'])->name('getDashboardBarCreatedSurveys');
+    Route::get('dashboardBarCompletedSurveys', [DashboardController::class, 'getBarCompletedSurveys'])->name('getDashboardBarCompletedSurveys');
+
+    Route::post('/getExcelStatus', [EncuestaController::class, 'getExcelStatusByEncuestaId'])->name('getExcelStatusByEncuestaId');
+    Route::post('/getAnualReportExcel', [EncuestaController::class, 'getAnualReportExcelByEmpresaId'])->name('getAnualReportExcelByEmpresaId');
+    Route::get('/getStatusSchools', [EncuestaController::class, 'getStatusSchools'])->name('getStatusSchools');
+
 });
 
 

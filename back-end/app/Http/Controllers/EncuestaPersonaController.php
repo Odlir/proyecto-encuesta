@@ -8,6 +8,7 @@ use App\Carrera;
 use App\CarreraPuntaje;
 use App\Encuesta;
 use App\EncuestaPersona;
+use App\EncuestaPersonaCompletada;
 use App\EncuestaPuntaje;
 use App\EncuestaRespuesta;
 use App\Formula;
@@ -86,6 +87,10 @@ class EncuestaPersonaController extends Controller
         //DATA[2] SON TUS RESPUESTAS
 
         if ($data[1] == 1) {
+            $registro = EncuestaPersona::where('persona_id', $data[0]['persona_id'])->first();
+            $registro->completada = '1';
+            $registro->fecha_completada = now();
+            $registro->save();
             return $this->intereses($data[2], $encuesta_puntaje['id']);
         } else if ($data[1] == 3) {
             return $this->temperamentos($data[2], $encuesta_puntaje['id']);

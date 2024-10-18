@@ -1,75 +1,103 @@
-<div class="content">
-	<div class="container-fluid mt-2">
-		<div class="row mb-4">
-            <div class="col-sm-6 col-md-3 mb-3">
-                <div class="card-counter primary">
-                    <fa-icon [icon]="['fas', 'poll']"></fa-icon>
-                    <span class="count-numbers">1534</span>
-                    <span class="count-name">Encuestas 2024</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3 mb-3">
-                <div class="card-counter danger">
-                    <fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
-                    <span class="count-numbers">14</span>
-                    <span class="count-name">Test por completar</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3 mb-3">
-                <div class="card-counter success">
-                    <fa-icon [icon]="['fas', 'database']"></fa-icon>
-                    <span class="count-numbers">85%</span>
-                    <span class="count-name">% Encuestas Completadas</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3 mb-3">
-                <div class="card-counter info">
-                    <fa-icon [icon]="['fas', 'folder-open']"></fa-icon>
-                    <span class="count-numbers">10</span>
-                    <span class="count-name">Nuevas Encuestas del Mes</span>
-                </div>
-            </div>
+<div class="row mb-4">
+	<div class="col-xl-3 col-md-6">
+		<div class="card-counter primary">
+			<fa-icon [icon]="['fas', 'poll']"></fa-icon>
+			<span class="count-numbers">{{ totalSurveys }}</span>
+			<span class="count-name">Total de Encuestas</span>
 		</div>
-		<div class="row mb-5">
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-body">
-						<canvas baseChart
-								[data]="pieChartData"
-								[labels]="pieChartLabels"
-								[options]="pieChartOptions"
-								[legend]="pieChartLegend"
-								[chartType]="pieChartType">
-						</canvas>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-body">
-						<canvas baseChart
-								[data]="polarAreaChartData.data"
-								[labels]="polarAreaChartLabels"
-								[options]="polarAreaChartOptions"
-								[chartType]="polarAreaChartType">
-						</canvas>
-					</div>
-				</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card-counter danger position-relative">
+			<fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
+			<span class="count-text">{{ carrers }}</span>
+			<span class="count-name">Top 3 </span>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card-counter success">
+			<fa-icon [icon]="['fas', 'database']"></fa-icon>
+			<span class="count-numbers">{{ completedSurveys }}%</span>
+			<span class="count-name">Encuestas Completadas %</span>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card-counter info">
+			<fa-icon [icon]="['fas', 'folder-open']"></fa-icon>
+			<span class="count-numbers">{{ newSurveys }}</span>
+			<span class="count-name">Nuevas Encuestas del Mes</span>
+		</div>
+	</div>
+</div>
+<div class="row mb-5">
+	<div
+		class="col-lg-6"
+		*ngIf="pieChartCarrersLabels.length && pieChartCarrersData.length"
+	>
+		<div class="card">
+			<div class="card-body">
+				<canvas
+					baseChart
+					[data]="pieChartCarrersData"
+					[labels]="pieChartCarrersLabels"
+					[options]="pieChartCarrersOptions"
+					[legend]="pieChartLegend"
+					[chartType]="pieChartType"
+					[plugins]="barChartPlugins"
+				>
+				</canvas>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-body">
-						<canvas baseChart
-								[datasets]="barChartData"
-								[labels]="barChartLabels"
-								[options]="barChartOptions"
-								[legend]="barChartLegend"
-								[chartType]="barChartType">
-						</canvas>
-					</div>
-				</div>
+	</div>
+	<div
+		class="col-lg-6"
+		*ngIf="pieChartSchoolsLabels.length && pieChartSchoolsData.length"
+	>
+		<div class="card">
+			<div class="card-body">
+				<canvas
+					baseChart
+					[data]="pieChartSchoolsData"
+					[labels]="pieChartSchoolsLabels"
+					[options]="pieChartSchoolsOptions"
+					[legend]="pieChartLegend"
+					[chartType]="pieChartType"
+					[plugins]="barChartPlugins"
+				>
+				</canvas>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-12" *ngIf="barChartCreatedSurveysData.length">
+		<div class="card">
+			<div class="card-body">
+				<canvas
+					baseChart
+					[datasets]="barChartCreatedSurveysData"
+					[labels]="barChartLabels"
+					[options]="barChartCreatedSurveysOptions"
+					[legend]="barChartLegend"
+					[chartType]="barChartType"
+					[plugins]="barChartPlugins"
+				>
+				</canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-12" *ngIf="barChartCompletedSurveysData.length">
+		<div class="card">
+			<div class="card-body">
+				<canvas
+					baseChart
+					[datasets]="barChartCompletedSurveysData"
+					[labels]="barChartLabels"
+					[options]="barChartCompletedSurveysOptions"
+					[legend]="barChartLegend"
+					[chartType]="barChartType"
+					[plugins]="barChartPlugins"
+				>
+				</canvas>
 			</div>
 		</div>
 	</div>

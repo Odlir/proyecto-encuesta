@@ -15,6 +15,8 @@ class EncuestaPersona extends Model
         'estado',
         'persona_id',
         'encuesta_general_id',
+        'completada',
+        'fecha_completada',
         'insert_user_id',
         'edit_user_id'
     ];
@@ -23,6 +25,13 @@ class EncuestaPersona extends Model
     {
         return $this->belongsTo('App\Persona');
     }
+
+    public function encuesta() {
+        return $this->belongsTo('App\Encuesta');
+    }
+
+
+
 
     public function insert()
     {
@@ -33,4 +42,25 @@ class EncuestaPersona extends Model
     {
         return $this->belongsTo('App\User', 'edit_user_id');
     }
+
+    public function puntajes()
+    {
+        return $this->hasMany(EncuestaPuntaje::class, 'persona_id', 'persona_id');
+    }
+
+    public function respuestas()
+    {
+        return $this->hasManyThrough(
+            EncuestaRespuesta::class,
+            EncuestaPuntaje::class,
+            'persona_id',
+            'encuesta_puntaje_id',
+            'persona_id',
+            'id'
+        );
+    }
+
+
+
+
 }

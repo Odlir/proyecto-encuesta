@@ -24,5 +24,9 @@
 		<fa-icon [icon]="['fas', 'poll']"></fa-icon>
 		<span class="full-width" *ngIf="isExpanded">Reportes</span>
 	</a>
+	<a [class.expanded]="isExpanded" class="parent" mat-list-item routerLinkActive="list-item-active" routerLink="reporte-anual">
+		<fa-icon [icon]="['fas', 'poll']"></fa-icon>
+		<span class="full-width" *ngIf="isExpanded">Rep. Anual</span>
+	</a>
 </mat-nav-list>
 
